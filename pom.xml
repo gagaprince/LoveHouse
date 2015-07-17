@@ -17,13 +17,14 @@
     </dependency>
     <dependency>
       <groupId>org.glassfish</groupId>
-      <artifactId>javax.annotation</artifactId>
-      <version>3.0.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish</groupId>
       <artifactId>javax.ejb</artifactId>
       <version>3.0.1</version>
+      <exclusions>
+      	<exclusion>
+      		<artifactId>javax.annotation</artifactId>
+      		<groupId>org.glassfish</groupId>
+      	</exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.glassfish</groupId>
@@ -33,11 +34,6 @@
     <dependency>
       <groupId>org.glassfish</groupId>
       <artifactId>javax.jms</artifactId>
-      <version>3.0.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish</groupId>
-      <artifactId>javax.management.j2ee</artifactId>
       <version>3.0.1</version>
     </dependency>
     <dependency>
@@ -67,11 +63,6 @@
     </dependency>
     <dependency>
       <groupId>org.glassfish</groupId>
-      <artifactId>javax.servlet.jsp</artifactId>
-      <version>3.0.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish</groupId>
       <artifactId>javax.servlet.jsp.jstl</artifactId>
       <version>3.0.1</version>
     </dependency>
@@ -94,6 +85,16 @@
       <groupId>org.glassfish.web</groupId>
       <artifactId>jstl-impl</artifactId>
       <version>1.2</version>
+      <exclusions>
+      	<exclusion>
+      		<artifactId>servlet-api</artifactId>
+      		<groupId>javax.servlet</groupId>
+      	</exclusion>
+      	<exclusion>
+      		<artifactId>jsp-api</artifactId>
+      		<groupId>javax.servlet.jsp</groupId>
+      	</exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>javax.mail</groupId>
@@ -110,6 +111,16 @@
       <artifactId>weld-osgi-bundle</artifactId>
       <version>1.0.1-SP3</version>
     </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-web</artifactId>
+    	<version>4.1.5.RELEASE</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-webmvc</artifactId>
+    	<version>4.1.5.RELEASE</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -123,6 +134,23 @@
           <target>1.6</target>
         </configuration>
       </plugin>
+      <plugin>
+		<groupId>org.apache.tomcat.maven</groupId>
+		<artifactId>tomcat7-maven-plugin</artifactId>
+		<!-- or if you want to use tomcat 6.x <artifactId>tomcat6-maven-plugin</artifactId> -->
+		<version>2.0</version>
+		<configuration>
+			<contextReloadable>false</contextReloadable>
+			<contextFile>D:\tools\apache-tomcat-7.0.26\conf\context.xml
+			</contextFile>
+			<!-- application path always starts with / -->
+			<path>/</path>
+			<!-- http port -->
+			<port>8081</port>
+			<uriEncoding>UTF-8</uriEncoding>
+			<useTestClasspath>false</useTestClasspath>
+		</configuration>
+	</plugin>
     </plugins>
   </build>
 </project>
