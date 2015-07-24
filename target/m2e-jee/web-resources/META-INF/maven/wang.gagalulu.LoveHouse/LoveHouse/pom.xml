@@ -200,4 +200,35 @@
 	</plugin>
     </plugins>
   </build>
+  <profiles>
+
+		<profile>
+			<id>local</id>
+			<properties>
+				<deploy.type>local</deploy.type>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>dev</id>
+			<properties>
+				<deploy.type>dev</deploy.type>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>beta</id>
+			<properties>
+				<deploy.type>beta</deploy.type>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>prod</id>
+			<properties>
+				<deploy.type>prod</deploy.type>
+			</properties>
+		</profile>
+
+	</profiles>
 </project>

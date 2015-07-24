@@ -23,7 +23,7 @@
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
 		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/lovehouse?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull" />
 		<property name="user" value="root" />
-		<property name="password" value="gagaprince" />
+		<property name="password" value="root" />
 		<property name="initialPoolSize" value="5" />
 		<property name="minPoolSize" value="5" />
 		<property name="maxPoolSize" value="50" />
