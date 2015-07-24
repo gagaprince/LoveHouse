@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ import wang.gagalulu.lovehouse.weixin.config.WeiXinConfig;
 
 @Service
 public class WeiXinInService {
+	private static final Logger logger =  Logger.getLogger(WeiXinInService.class);
+	
 	@Autowired
 	private WeiXinConfig wxConfig;
 	
@@ -48,6 +51,11 @@ public class WeiXinInService {
 		String nonce = request.getParameter("nonce");
 		String echostr = request.getParameter("echostr");
 		String inToken = wxConfig.get("inToken");
+		logger.info("signature:"+signature);
+		logger.info("timestamp:"+timestamp);
+		logger.info("nonce:"+nonce);
+		logger.info("echostr:"+echostr);
+		logger.info("inToken:"+inToken);
 		WXInModel wxInModel = new WXInModel();
 		wxInModel.setSignature(signature);
 		wxInModel.setEchostr(echostr);
