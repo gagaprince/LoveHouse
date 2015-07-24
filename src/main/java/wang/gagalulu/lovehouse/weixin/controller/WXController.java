@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,9 +35,9 @@ public class WXController {
 	@Autowired
 	private WeiXinMsgService wxMsgService;
 	
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/index")
 	@ResponseBody
-	public String wxCall(HttpServletRequest request){
+	public String wxCall(HttpServletRequest request,@RequestBody String xml){
 		String rspStr = "";
 		String method = request.getMethod();
 		if("GET".equals(method)){
@@ -44,7 +45,7 @@ public class WXController {
 			rspStr = wxInService.doExcuteInWeiXin(request);
 		}else if("POST".equals(method)){
 			//接收微信消息
-			rspStr = wxMsgService.doExcuteMsg(request);
+			rspStr = wxMsgService.doExcuteMsg(request,xml);
 		}
 		return rspStr;
 	}
