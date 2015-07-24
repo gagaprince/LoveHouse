@@ -19,7 +19,7 @@ public class WeiXinMsgService {
 	public String doExcuteMsg(HttpServletRequest request,String xml){
 		xml = StringUtil.getStringUTF8(xml);
 		logger.info("接收到的xml:"+xml);
-		return dispatch(xml);
+		return StringUtil.getStringISO88591(dispatch(xml));
 	}
 	
 	private String dispatch(String xml){

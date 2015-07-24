@@ -12,4 +12,14 @@ public class StringUtil {
 		}
 		return outStr;
 	}
+	
+	public static String getStringISO88591(String instr){
+		String outStr = "";
+		try {
+			outStr = new String(instr.getBytes("utf-8"),"iso-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return outStr;
+	}
 }
