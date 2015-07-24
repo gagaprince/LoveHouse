@@ -19,19 +19,19 @@ public class WeiXinMsgService {
 	public String doExcuteMsg(HttpServletRequest request,String xml){
 		xml = StringUtil.getStringUTF8(xml);
 		logger.info("接收到的xml:"+xml);
-		dispatch(xml);
-		return "";
+		return dispatch(xml);
 	}
 	
-	private void dispatch(String xml){
+	private String dispatch(String xml){
 		try {
-			msgCenterFactory.executeMsg(xml);
+			String rep = msgCenterFactory.executeMsg(xml);
+			return rep;
 		} catch (DocumentException e) {
 			e.printStackTrace();
 			logger.error("读取xml内容出错：-----"+xml);
 		}
 		
-		
+		return "";
 	}
 	
 }

@@ -15,8 +15,8 @@ public class MsgCenterFactory {
 	private static final Logger logger =  Logger.getLogger(MsgCenterFactory.class);
 	private List<MsgCenter> msgCenterList;
 	
-	public void executeMsg(String xml) throws DocumentException{
-		if(msgCenterList==null)return;
+	public String executeMsg(String xml) throws DocumentException{
+		if(msgCenterList==null)return "";
 		
 		SAXReader reader = new SAXReader();
 		Document document;
@@ -38,11 +38,13 @@ public class MsgCenterFactory {
 		WXMsg wxMsgGet = new WXMsg( toUserName,  fromUserName,  createTime,
 				 msgId,  msgType);
 		int size = msgCenterList.size();
+		WXMsg wxMsg = null;
 		for(int i=0;i<size;i++){
 			MsgCenter msgCenter = msgCenterList.get(i);
-			WXMsg wxMsg = msgCenter.executeMsg(root,wxMsgGet);
+			wxMsg = msgCenter.executeMsg(root,wxMsgGet);
 			if(wxMsg!=null)break;
 		}
+		return wxMsg!=null?wxMsg.toXmlString():"";
 	}
 
 	public List<MsgCenter> getMsgCenterList() {
