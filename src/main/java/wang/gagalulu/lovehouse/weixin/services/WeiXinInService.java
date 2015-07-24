@@ -50,7 +50,7 @@ public class WeiXinInService {
 		String timestamp = request.getParameter("timestamp");
 		String nonce = request.getParameter("nonce");
 		String echostr = request.getParameter("echostr");
-		String inToken = wxConfig.get("inToken");
+		String inToken = wxConfig.get("intoken");
 		logger.info("signature:"+signature);
 		logger.info("timestamp:"+timestamp);
 		logger.info("nonce:"+nonce);
