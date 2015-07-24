@@ -15,8 +15,9 @@
             http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <import resource="app-context.xml" />
-<!--     <import resource="app-template.xml" />
     <import resource="app-db.xml" />
+<!--     <import resource="app-template.xml" />
+    
     <import resource="app-consumer.xml"/>
     <import resource="app-consumer-conf.xml"/> -->
 </beans>

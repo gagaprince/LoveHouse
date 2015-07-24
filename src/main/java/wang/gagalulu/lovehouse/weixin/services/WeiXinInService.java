@@ -1,0 +1,69 @@
+package wang.gagalulu.lovehouse.weixin.services;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import wang.gagalulu.lovehouse.weixin.bean.WXInModel;
+import wang.gagalulu.lovehouse.weixin.config.WeiXinConfig;
+
+@Service
+public class WeiXinInService {
+	@Autowired
+	private WeiXinConfig wxConfig;
+	
+	public String doExcuteInWeiXin(HttpServletRequest request){
+		WXInModel wxInModel = parseWxInModel(request);
+		boolean isWXserver = checkSignature(wxInModel);
+		if(isWXserver){
+			return wxInModel.getEchostr();
+		}
+		return "";
+	}
+	
+	private static boolean checkSignature(WXInModel wxInModel){
+		List<String> signList = new ArrayList<String>();
+		signList.add(wxInModel.getTimestamp());
+		signList.add(wxInModel.getNonce());
+		signList.add(wxInModel.getInToken());
+		Collections.sort(signList);
+		StringBuffer sb = new StringBuffer("");
+		for(int i=0;i<signList.size();i++){
+			sb.append(signList.get(i));
+		}
+		String desStr = sb.toString();
+		desStr = DigestUtils.sha1Hex(desStr);
+		return desStr.equals(wxInModel.getSignature());
+	}
+	
+	private WXInModel parseWxInModel(HttpServletRequest request){
+		String signature = request.getParameter("signature");
+		String timestamp = request.getParameter("timestamp");
+		String nonce = request.getParameter("nonce");
+		String echostr = request.getParameter("echostr");
+		String inToken = wxConfig.get("inToken");
+		WXInModel wxInModel = new WXInModel();
+		wxInModel.setSignature(signature);
+		wxInModel.setEchostr(echostr);
+		wxInModel.setInToken(inToken);
+		wxInModel.setNonce(nonce);
+		wxInModel.setTimestamp(timestamp);
+		return wxInModel;
+	}
+	
+	public static void main(String[] args) {
+		WXInModel wxInModel = new WXInModel();
+		wxInModel.setSignature("");
+		wxInModel.setEchostr("");
+		wxInModel.setInToken("gagaprince");
+		wxInModel.setNonce("z23456");
+		wxInModel.setTimestamp("iojlkjlskjdflkjsdfj");
+		checkSignature(wxInModel);
+	}
+}
