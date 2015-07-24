@@ -27,5 +27,16 @@
         <property name="order" value="1"/>
      </bean>
      
+     <bean id="textMsgCenter" class="wang.gagalulu.lovehouse.weixin.services.msgtool.TextMsgCenter">
+     	<property name="msgType" value="text"></property>
+     </bean>
+     
+     <bean id="msgCenterFactory" class="wang.gagalulu.lovehouse.weixin.services.msgtool.MsgCenterFactory">
+     	<property name="msgCenterList">
+     		<list>
+     			<ref bean="textMsgCenter"></ref>
+     		</list>
+     	</property>
+     </bean>
      <!-- <bean id="wxConfig" class="wang.gagalulu.lovehouse.weixin.config.WeiXinConfig" init-method="init"></bean> -->
 </beans>
