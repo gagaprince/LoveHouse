@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,10 +49,14 @@ public class QaService {
 	private AnswerBean getAnswerByQuestion(String question){
 		HashMap<String,Object> params = new HashMap<String,Object>();
 		params.put("question", question);
-		AnswerBean answerBean = qaDao.getAnswerByQusition(params);
-		if(answerBean==null){
+		List<AnswerBean> answerBeanList = qaDao.getAnswerByQusition(params);
+		AnswerBean answerBean;
+		if(answerBeanList==null){
 			answerBean = new AnswerBean();
 			answerBean.setAnswer("该怎么回答呢，教教我！");
+		}else{
+			int index = new Random().nextInt(answerBeanList.size());
+			answerBean = answerBeanList.get(index);
 		}
 		return answerBean;
 	}
