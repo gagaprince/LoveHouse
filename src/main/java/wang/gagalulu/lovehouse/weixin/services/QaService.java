@@ -51,7 +51,7 @@ public class QaService {
 		params.put("question", question);
 		List<AnswerBean> answerBeanList = qaDao.getAnswerByQusition(params);
 		AnswerBean answerBean;
-		if(answerBeanList==null){
+		if(answerBeanList==null||answerBeanList.size()==0){
 			answerBean = new AnswerBean();
 			answerBean.setAnswer("该怎么回答呢，教教我！");
 		}else{
