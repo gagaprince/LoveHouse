@@ -53,11 +53,15 @@ public class QaService {
 		AnswerBean answerBean;
 		if(answerBeanList==null||answerBeanList.size()==0){
 			answerBean = new AnswerBean();
-			answerBean.setAnswer("该怎么回答呢，教教我！");
+			answerBean.setAnswer("");
 		}else{
 			int index = new Random().nextInt(answerBeanList.size());
 			answerBean = answerBeanList.get(index);
 		}
 		return answerBean;
+	}
+	
+	public String getDefaultAnswer(){
+		return "该怎么回答呢？你教教我吧~ 回复“ 问：你几岁了？答：今年1岁了！ ”如此句式，教我学话吧~";
 	}
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wang.gagalulu.lovehouse.dao.QaDao">
+	<resultMap id="qaModelResultMap" type="AnswerBean">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="question" property="question" jdbcType="VARCHAR" />
+		<result column="answer" property="answer" jdbcType="VARCHAR" />
+		<result column="insertTime" property="insertTime" jdbcType="DATE" />
+	</resultMap>
+	
+	<insert id="save"
+		parameterType="AnswerBean"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into qa(
+		<trim suffixOverrides=",">
+			<if test="id != null"> id ,</if>
+			<if test="question != null"> question ,</if>
+			<if test="answer != null"> answer ,</if>
+			<if test="insertTime != null"> insertTime ,</if>
+		</trim>
+		)values(
+		<trim suffixOverrides=",">
+			<if test="id != null"> #{id} ,</if>
+			<if test="question != null"> #{question} ,</if>
+			<if test="answer != null"> #{answer} ,</if>
+			<if test="insertTime != null"> #{insertTime} ,</if>
+		</trim>
+		)
+	</insert>
+	
+	
+	<select id="getAnswerByQusition" parameterType="map"  resultMap="qaModelResultMap">
+		select * from qa s
+		<where>
+				1 = 1
+			<if test="question != null">
+				and s.question = #{question}
+			</if>		
+		</where>  
+	</select>
+</mapper>

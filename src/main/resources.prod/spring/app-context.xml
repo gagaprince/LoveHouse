@@ -16,7 +16,8 @@
 
 	<context:property-placeholder location="classpath:*.properties" />
 	<context:component-scan base-package="wang.gagalulu.lovehouse" />
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+   </mvc:annotation-driven>
 	
 	<!-- 配置JSP视图 -->
      <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
