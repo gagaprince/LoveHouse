@@ -1,9 +1,0 @@
-0:0:0:0:0:0:0:1 - - [24/Jul/2015:19:47:32 +0800] "GET /lovelulu/index HTTP/1.1" 200 3730 http-bio-8081-exec-1 1411
-0:0:0:0:0:0:0:1 - - [24/Jul/2015:19:47:32 +0800] "GET /fe/js/lib/zepto-1.1.4.js HTTP/1.1" 200 24585 http-bio-8081-exec-3 10
-0:0:0:0:0:0:0:1 - - [24/Jul/2015:19:47:32 +0800] "POST /lovelulu/wx/index HTTP/1.1" 405 1047 http-bio-8081-exec-4 14
-0:0:0:0:0:0:0:1 - - [24/Jul/2015:19:48:58 +0800] "GET /lovelulu/index HTTP/1.1" 200 3730 http-bio-8081-exec-6 10
-0:0:0:0:0:0:0:1 - - [24/Jul/2015:19:48:58 +0800] "GET /fe/js/lib/zepto-1.1.4.js HTTP/1.1" 304 - http-bio-8081-exec-10 2
-0:0:0:0:0:0:0:1 - - [24/Jul/2015:19:48:58 +0800] "POST /lovelulu/wx/index HTTP/1.1" 405 1047 http-bio-8081-exec-10 3
-0:0:0:0:0:0:0:1 - - [24/Jul/2015:19:50:49 +0800] "GET /lovelulu/index HTTP/1.1" 200 3730 http-bio-8081-exec-1 269
-0:0:0:0:0:0:0:1 - - [24/Jul/2015:19:50:49 +0800] "GET /fe/js/lib/zepto-1.1.4.js HTTP/1.1" 304 - http-bio-8081-exec-5 4
-0:0:0:0:0:0:0:1 - - [24/Jul/2015:19:50:49 +0800] "POST /lovelulu/wx/index HTTP/1.1" 200 - http-bio-8081-exec-6 36
