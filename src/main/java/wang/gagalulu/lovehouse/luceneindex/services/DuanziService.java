@@ -108,10 +108,10 @@ public class DuanziService {
         if (searcher != null) {    
         	Sort sort = new Sort();
         	sort.setSort(new SortField("date",SortField.DOC));
-            TopDocs results = searcher.search(query,10,sort);    //返回最多为10条记录  
+            TopDocs results = searcher.search(query,5,sort);    //返回最多为10条记录  
             hits = results.scoreDocs;  
             if (hits.length > 0) {    
-            	int index = 0;
+            	int index = new Random().nextInt(hits.length);
                 Document hitDoc = searcher.doc(hits[index].doc);
                 result = hitDoc.get("content");
                 logger.info("找到:" + hits.length + " 个结果!");    
