@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import wang.gagalulu.lovehouse.luceneindex.services.DuanziService;
 
 @Controller
-@RequestMapping("/createIndex")
+@RequestMapping("/lovelulu/createIndex")
 public class CreateIndexController {
 	@Autowired
 	private DuanziService duanziService;
