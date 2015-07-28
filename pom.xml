@@ -184,21 +184,6 @@
     	<version>1.9.6.RELEASE</version>
     </dependency>
     <dependency>
-    	<groupId>org.lionsoul.jcseg</groupId>
-    	<artifactId>jcseg-dicmerge</artifactId>
-    	<version>1.9.6.RELEASE</version>
-    </dependency>
-    <dependency>
-    	<groupId>org.lionsoul.jcseg</groupId>
-    	<artifactId>jcseg-dicst</artifactId>
-    	<version>1.9.6.RELEASE</version>
-    </dependency>
-    <dependency>
-    	<groupId>org.lionsoul.jcseg</groupId>
-    	<artifactId>jcseg-elasticsearch</artifactId>
-    	<version>1.9.6.RELEASE</version>
-    </dependency>
-    <dependency>
     	<groupId>org.apache.lucene</groupId>
     	<artifactId>lucene-core</artifactId>
     	<version>5.1.0</version>
