@@ -175,13 +175,48 @@
     </dependency>
     <dependency>
     	<groupId>org.apache.lucene</groupId>
-    	<artifactId>lucene-core</artifactId>
+    	<artifactId>lucene-analyzers</artifactId>
     	<version>3.6.2</version>
     </dependency>
     <dependency>
+    	<groupId>org.lionsoul.jcseg</groupId>
+    	<artifactId>jcseg-core</artifactId>
+    	<version>1.9.6.RELEASE</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.lionsoul.jcseg</groupId>
+    	<artifactId>jcseg-analyzer</artifactId>
+    	<version>1.9.6.RELEASE</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.lionsoul.jcseg</groupId>
+    	<artifactId>jcseg-dicmerge</artifactId>
+    	<version>1.9.6.RELEASE</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.lionsoul.jcseg</groupId>
+    	<artifactId>jcseg-dicst</artifactId>
+    	<version>1.9.6.RELEASE</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.lionsoul.jcseg</groupId>
+    	<artifactId>jcseg-elasticsearch</artifactId>
+    	<version>1.9.6.RELEASE</version>
+    </dependency>
+    <dependency>
     	<groupId>org.apache.lucene</groupId>
-    	<artifactId>lucene-analyzers</artifactId>
-    	<version>3.6.2</version>
+    	<artifactId>lucene-core</artifactId>
+    	<version>5.1.0</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.lucene</groupId>
+    	<artifactId>lucene-analyzers-common</artifactId>
+    	<version>5.1.0</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.lucene</groupId>
+    	<artifactId>lucene-queryparser</artifactId>
+    	<version>5.1.0.RELEASE</version>
     </dependency>
   </dependencies>
   <build>
@@ -194,6 +229,7 @@
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
+          <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
       <plugin>

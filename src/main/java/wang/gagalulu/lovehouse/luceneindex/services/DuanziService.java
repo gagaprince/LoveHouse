@@ -1,7 +1,7 @@
 package wang.gagalulu.lovehouse.luceneindex.services;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,25 +9,27 @@ import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
+import org.apache.lucene.document.Field.Store;
+import org.apache.lucene.document.LongField;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.CorruptIndexException;
-import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
-import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.Sort;
-import org.apache.lucene.search.SortField;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.util.Version;
+import org.lionsoul.jcseg.analyzer.JcsegAnalyzer5X;
+import org.lionsoul.jcseg.core.JcsegTaskConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,10 +52,12 @@ public class DuanziService {
 		long begin = 0;
 		int length = 10000;
 		 /* 这里放索引文件的位置 */    
-        File indexDir = new File(luceneConfig.getDuanziIndexPath());    
-        Directory dir = FSDirectory.open(indexDir);  
-        Analyzer luceneAnalyzer = new StandardAnalyzer(Version.LUCENE_36);  
-        IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_36,luceneAnalyzer);  
+//        File indexDir = new File(luceneConfig.getDuanziIndexPath());    
+		FSDirectory.open(Paths.get(luceneConfig.getDuanziIndexPath()));
+        Directory dir = FSDirectory.open(Paths.get(luceneConfig.getDuanziIndexPath()));  
+        Analyzer luceneAnalyzer = giveMeAnalyzer();
+        
+        IndexWriterConfig iwc = new IndexWriterConfig(luceneAnalyzer);  
         iwc.setOpenMode(OpenMode.CREATE);  
         IndexWriter indexWriter = new IndexWriter(dir,iwc);    
 		while(begin<allCount){
@@ -74,17 +78,28 @@ public class DuanziService {
 		indexWriter.close();
 		return "建立索引完毕";
 	}
+	
+	private Analyzer giveMeAnalyzer(){
+		Analyzer luceneAnalyzer = new JcsegAnalyzer5X(JcsegTaskConfig.COMPLEX_MODE);
+        JcsegAnalyzer5X jcseg = (JcsegAnalyzer5X) luceneAnalyzer;
+        JcsegTaskConfig jcsegTaskConfig = jcseg.getTaskConfig();  
+        logger.info(jcsegTaskConfig.getPropertieFile());
+        jcsegTaskConfig.setAppendCJKPinyin(true);  
+        jcsegTaskConfig.setAppendCJKSyn(true); 
+        
+//      Analyzer luceneAnalyzer = new StandardAnalyzer(Version.LUCENE_36);  
+        
+        return luceneAnalyzer;
+	}
+	
 	public void createIndexByList(List<DuanZiModel> duanziList,IndexWriter indexWriter) throws CorruptIndexException, IOException{
         //增加document到索引去    
         for (int i = 0; i < duanziList.size(); i++) { 
         	DuanZiModel duanzi = duanziList.get(i);  
             Document document = new Document();    
-            Field fieldId = new Field("id", duanzi.getId(),    
-                    Field.Store.YES, Field.Index.NO);    
-            Field fieldContent = new Field("content", duanzi.getContent(), Field.Store.YES,    
-                    Field.Index.ANALYZED,    
-                    Field.TermVector.WITH_POSITIONS_OFFSETS);
-            Field fieldDate = new Field("date",duanzi.getDate(),Field.Store.YES, Field.Index.NO);
+            Field fieldId = new LongField("id", duanzi.getId(),Store.YES);
+            Field fieldContent = new TextField("content", duanzi.getContent(),Store.YES);
+            Field fieldDate = new StringField("date",duanzi.getDate(),Store.YES);
             document.add(fieldId);    
             document.add(fieldContent);    
             document.add(fieldDate);   
@@ -93,34 +108,79 @@ public class DuanziService {
 	}
 	
 	public String IWantOneDuanzi(String key) throws CorruptIndexException, IOException, ParseException{
-		IndexReader reader = luceneConfig.getIndexReader();
+		DirectoryReader reader = luceneConfig.getIndexReader();
         IndexSearcher searcher = new IndexSearcher(reader);    
           
         ScoreDoc[] hits = null;    
         String queryString = key;   //搜索的关键词  
         String result = "";
         Query query = null;    
-          
-    
-        Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_36);    
-        QueryParser qp = new QueryParser(Version.LUCENE_36,"content", analyzer);    
+        
+        Analyzer luceneAnalyzer = giveMeAnalyzer();
+        
+        QueryParser qp = new QueryParser("content", luceneAnalyzer);    
         query = qp.parse(queryString);    
         if (searcher != null) {    
-        	Sort sort = new Sort();
-        	sort.setSort(new SortField("date",SortField.DOC));
-            TopDocs results = searcher.search(query,5,sort);    //返回最多为10条记录  
+//        	Sort sort = new Sort();
+//        	sort.setSort(new SortField("date",SortField.DOC));
+            TopDocs results = searcher.search(query,5);    //返回最多为10条记录  
             hits = results.scoreDocs;  
             if (hits.length > 0) {    
             	int index = new Random().nextInt(hits.length);
-                Document hitDoc = searcher.doc(hits[index].doc);
-                result = hitDoc.get("content");
+            	ScoreDoc selectDoc = hits[index];
+            	logger.info("选中的结果评分为："+selectDoc.score);
+            	if(selectDoc.score>1){
+            		Document hitDoc = searcher.doc(selectDoc.doc);
+                    result = hitDoc.get("content");
+                    logger.info(hitDoc.get("id")+"-------"+hitDoc.get("content")+"----"+hitDoc.get("date")); 
+            	}
                 logger.info("找到:" + hits.length + " 个结果!");    
                 logger.info("可以找到:" + results.totalHits + " 个结果!");  
-                logger.info(hitDoc.get("id")+"-------"+hitDoc.get("content")+"----"+hitDoc.get("date")); 
             }
-            searcher.close();  
         }
         return result;
+	}
+	
+	public static void main(String[] args) throws ParseException, IOException {
+		DirectoryReader reader = DirectoryReader.open(FSDirectory.open(Paths.get("D:\\temp\\lovehouseIndex")));
+        IndexSearcher searcher = new IndexSearcher(reader);    
+          
+        ScoreDoc[] hits = null;    
+        String queryString = "的";   //搜索的关键词  
+        String result = "";
+        Query query = null;    
+        
+        Analyzer luceneAnalyzer = new JcsegAnalyzer5X(JcsegTaskConfig.COMPLEX_MODE);
+        JcsegAnalyzer5X jcseg = (JcsegAnalyzer5X) luceneAnalyzer;
+        JcsegTaskConfig jcsegTaskConfig = jcseg.getTaskConfig();  
+        logger.info(jcsegTaskConfig.getPropertieFile());
+        jcsegTaskConfig.setAppendCJKPinyin(true);  
+        jcsegTaskConfig.setAppendCJKSyn(true); 
+        
+        QueryParser qp = new QueryParser("content", luceneAnalyzer);    
+        query = qp.parse(queryString);  
+        System.out.println(query);
+        if (searcher != null) {    
+//        	Sort sort = new Sort();
+//        	sort.setSort(new SortField("date",SortField.DOC));
+            TopDocs results = searcher.search(query,5);    //返回最多为10条记录  
+            hits = results.scoreDocs; 
+            System.out.println(results.totalHits);
+            System.out.println(hits.length);
+            if (hits.length > 0) {    
+            	int index = new Random().nextInt(hits.length);
+            	
+            	ScoreDoc selectDoc = hits[index];
+            	System.out.println("选中的结果评分为："+selectDoc.score);
+            	if(selectDoc.score>1){
+            		Document hitDoc = searcher.doc(selectDoc.doc);
+                    result = hitDoc.get("content");
+                    System.out.println(hitDoc.get("id")+"-------"+hitDoc.get("content")+"----"+hitDoc.get("date")); 
+            	}
+                System.out.println("找到:" + hits.length + " 个结果!");    
+                System.out.println("可以找到:" + results.totalHits + " 个结果!");  
+            }
+        }
 	}
 	
 }

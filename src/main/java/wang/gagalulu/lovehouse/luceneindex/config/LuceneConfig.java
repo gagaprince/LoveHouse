@@ -1,7 +1,7 @@
 package wang.gagalulu.lovehouse.luceneindex.config;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import javax.annotation.PostConstruct;
 
@@ -10,7 +10,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.log4j.Logger;
 import org.apache.lucene.index.CorruptIndexException;
-import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.store.FSDirectory;
 import org.springframework.stereotype.Service;
 
@@ -46,8 +46,8 @@ public class LuceneConfig {
 		return duanziIndexPath;
 	}
 	
-	public IndexReader getIndexReader() throws CorruptIndexException, IOException{
-		IndexReader reader = IndexReader.open(FSDirectory.open(new File(getDuanziIndexPath())));
+	public DirectoryReader getIndexReader() throws CorruptIndexException, IOException{
+		DirectoryReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(getDuanziIndexPath())));
 		return reader;
 	}
 }

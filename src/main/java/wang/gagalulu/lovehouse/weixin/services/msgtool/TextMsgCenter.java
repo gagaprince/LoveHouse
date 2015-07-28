@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import org.apache.lucene.index.CorruptIndexException;
-import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.dom4j.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 

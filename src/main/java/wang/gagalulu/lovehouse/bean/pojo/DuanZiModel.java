@@ -2,7 +2,7 @@ package wang.gagalulu.lovehouse.bean.pojo;
 
 public class DuanZiModel {
 	private String content;
-	private String id ;
+	private Long id ;
 	private String date;
 	private String updateTime;
 	private String fromId;
@@ -40,10 +40,10 @@ public class DuanZiModel {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getDate() {
