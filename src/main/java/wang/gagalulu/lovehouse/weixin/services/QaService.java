@@ -21,7 +21,7 @@ import wang.gagalulu.lovehouse.util.RegUtil;
 public class QaService {
 	@Autowired
 	private QaDao qaDao;
-	
+	@Autowired
 	private QaSearchService qaSearchService;
 	
 	public AnswerBean getAnswer(String qu){
