@@ -34,7 +34,9 @@ public class QaService {
 			return saveAnswer(question,answer);
 		}else{
 			try {
-				return qaSearchService.IWantOneAnswer(qu);
+				AnswerBean answer = qaSearchService.IWantOneAnswer(qu);
+				if(answer != null)
+					return answer;
 			} catch (CorruptIndexException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
