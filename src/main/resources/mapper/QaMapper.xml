@@ -41,7 +41,7 @@
 		</where>  
 	</select>
 	
-	<select id="getAnswerList" parameterType="map"  resultMap="duanZiModelResultMap">
+	<select id="getAnswerList" parameterType="map"  resultMap="qaModelResultMap">
 		select * from qa s
 		order by id desc
 		<if test="fromIndex != 0 or toIndex != 0">
