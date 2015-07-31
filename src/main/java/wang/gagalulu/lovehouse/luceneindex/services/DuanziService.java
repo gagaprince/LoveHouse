@@ -53,7 +53,6 @@ public class DuanziService {
 		int length = 10000;
 		 /* 这里放索引文件的位置 */    
 //        File indexDir = new File(luceneConfig.getDuanziIndexPath());    
-		FSDirectory.open(Paths.get(luceneConfig.getDuanziIndexPath()));
         Directory dir = FSDirectory.open(Paths.get(luceneConfig.getDuanziIndexPath()));  
         Analyzer luceneAnalyzer = giveMeAnalyzer();
         
@@ -83,7 +82,6 @@ public class DuanziService {
 		Analyzer luceneAnalyzer = new JcsegAnalyzer5X(JcsegTaskConfig.COMPLEX_MODE);
         JcsegAnalyzer5X jcseg = (JcsegAnalyzer5X) luceneAnalyzer;
         JcsegTaskConfig jcsegTaskConfig = jcseg.getTaskConfig();  
-        logger.info(jcsegTaskConfig.getPropertieFile());
         jcsegTaskConfig.setAppendCJKPinyin(true);  
         jcsegTaskConfig.setAppendCJKSyn(true); 
         

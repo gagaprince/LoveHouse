@@ -1,22 +1,28 @@
 package wang.gagalulu.lovehouse.weixin.services;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.apache.lucene.index.CorruptIndexException;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import wang.gagalulu.lovehouse.bean.pojo.AnswerBean;
 import wang.gagalulu.lovehouse.dao.QaDao;
+import wang.gagalulu.lovehouse.luceneindex.services.QaSearchService;
 import wang.gagalulu.lovehouse.util.RegUtil;
 
 @Service
 public class QaService {
 	@Autowired
 	private QaDao qaDao;
+	
+	private QaSearchService qaSearchService;
 	
 	public AnswerBean getAnswer(String qu){
 		RegUtil regUtil = RegUtil.getInstance();
@@ -27,7 +33,19 @@ public class QaService {
 			String answer = resultMap.get("answer");
 			return saveAnswer(question,answer);
 		}else{
-			return getAnswerByQuestion(qu);
+			try {
+				return qaSearchService.IWantOneAnswer(qu);
+			} catch (CorruptIndexException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			AnswerBean answerBean = new AnswerBean();
+			answerBean.setAnswer("");
+			return answerBean;
+//			return getAnswerByQuestion(qu);
 		}
 	}
 	
@@ -38,6 +56,7 @@ public class QaService {
 		answerBean.setInsertTime(new Date());
 		try {
 			qaDao.save(answerBean);
+			qaSearchService.addOneQaInIndex(answerBean);
 			answerBean.setAnswer("我已经学会了，不信你问问！");
 		} catch (Exception e) {
 			answerBean.setAnswer("没学会，再教一遍吧");

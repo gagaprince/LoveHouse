@@ -40,4 +40,17 @@
 			</if>		
 		</where>  
 	</select>
+	
+	<select id="getAnswerList" parameterType="map"  resultMap="duanZiModelResultMap">
+		select * from qa s
+		order by id desc
+		<if test="fromIndex != 0 or toIndex != 0">
+			limit #{fromIndex}, #{toIndex}
+		</if>
+	</select>
+	
+	<select id="getAllCount" resultType="Long" parameterType="map">
+		select count(*) from qa 
+		 
+	</select>
 </mapper>

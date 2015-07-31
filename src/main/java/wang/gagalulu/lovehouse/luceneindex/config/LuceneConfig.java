@@ -20,6 +20,9 @@ public class LuceneConfig {
 	private static final Logger logger =  Logger.getLogger(LuceneConfig.class);
 	
 	private String duanziIndexPath = null;
+	private String qaIndexPath = null;
+	private DirectoryReader reader;
+	private DirectoryReader qaReader;
 	
 	@PostConstruct
 	private void init() {
@@ -46,8 +49,44 @@ public class LuceneConfig {
 		return duanziIndexPath;
 	}
 	
-	public DirectoryReader getIndexReader() throws CorruptIndexException, IOException{
-		DirectoryReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(getDuanziIndexPath())));
+	public String getQaIndexPath(){
+		if(qaIndexPath == null){
+			qaIndexPath = get("qa.path");
+		}
+		return qaIndexPath;
+	}
+	
+	public DirectoryReader getQaIndexReader() throws CorruptIndexException, IOException{
+		return getQaIndexReader(getQaIndexPath());
+	}
+	
+	public DirectoryReader getQaIndexReader(String path) throws CorruptIndexException, IOException{
+		if(qaReader==null){
+			qaReader = DirectoryReader.open(FSDirectory.open(Paths.get(path)));
+		}else{
+			DirectoryReader dr = DirectoryReader.openIfChanged(qaReader);
+			if(dr!=null){
+				qaReader.close();
+				qaReader = dr;
+			}
+		}
+		return qaReader;
+	}
+	
+	public DirectoryReader getIndexReader(String path) throws CorruptIndexException, IOException{
+		if(reader==null){
+			reader = DirectoryReader.open(FSDirectory.open(Paths.get(path)));
+		}else{
+			DirectoryReader dr = DirectoryReader.openIfChanged(reader);
+			if(dr!=null){
+				reader.close();
+				reader = dr;
+			}
+		}
 		return reader;
+	}
+	
+	public DirectoryReader getIndexReader() throws CorruptIndexException, IOException{
+		return getIndexReader(getDuanziIndexPath());
 	}
 }

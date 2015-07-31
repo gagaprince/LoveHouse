@@ -12,6 +12,13 @@ public class AnswerBean {
 	}
 	private String question;
 	private String answer;
+	public AnswerBean(){}
+	public AnswerBean(long id, String question, String answer) {
+		super();
+		this.id = id;
+		this.question = question;
+		this.answer = answer;
+	}
 	private Date insertTime;
 	public String getQuestion() {
 		return question;
