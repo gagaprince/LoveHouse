@@ -176,8 +176,8 @@ public class QaSearchService {
             TopDocs results = searcher.search(query,5);    //返回最多为10条记录  
             hits = results.scoreDocs;  
             if (hits.length > 0) {    
-            	int index = new Random().nextInt(hits.length);
-            	ScoreDoc selectDoc = hits[index];
+//            	int index = new Random().nextInt(hits.length);
+            	ScoreDoc selectDoc = hits[0];
             	logger.info("选中的结果评分为："+selectDoc.score);
             	if(selectDoc.score>1){
             		Document hitDoc = searcher.doc(selectDoc.doc);
