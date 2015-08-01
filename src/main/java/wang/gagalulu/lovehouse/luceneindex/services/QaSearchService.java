@@ -168,14 +168,16 @@ public class QaSearchService {
 //            	int index = new Random().nextInt(hits.length);
             	ScoreDoc selectDoc = hits[0];
             	logger.info("选中的结果评分为："+selectDoc.score);
-        		Document hitDoc = searcher.doc(selectDoc.doc);
-        		String question = hitDoc.get("question");
-                String answer = hitDoc.get("answer");
-                Long id = Long.parseLong(hitDoc.get("id"));
-                result = new AnswerBean(id,question,answer);
-                logger.info(hitDoc.get("id")+"-------"+hitDoc.get("question")+"----"+hitDoc.get("answer")); 
-                logger.info("找到:" + hits.length + " 个结果!");    
-                logger.info("可以找到:" + results.totalHits + " 个结果!");  
+            	if(selectDoc.score>0.5){
+            		Document hitDoc = searcher.doc(selectDoc.doc);
+            		String question = hitDoc.get("question");
+                    String answer = hitDoc.get("answer");
+                    Long id = Long.parseLong(hitDoc.get("id"));
+                    result = new AnswerBean(id,question,answer);
+                    logger.info(hitDoc.get("id")+"-------"+hitDoc.get("question")+"----"+hitDoc.get("answer")); 
+                    logger.info("找到:" + hits.length + " 个结果!");    
+                    logger.info("可以找到:" + results.totalHits + " 个结果!");  
+            	}
             }
         }
         return result;
