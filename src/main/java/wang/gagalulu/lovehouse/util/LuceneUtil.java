@@ -39,7 +39,8 @@ public class LuceneUtil {
 	
 	public IndexSearcher getSearcher(String searcherName,IndexReader r){
 		IndexSearcher searcher = searcherMap.get(searcherName);
-		if(searcher == null){
+		//如果searcher是空的，或者 searcher中的reader已经关闭
+		if(searcher == null || searcher.getIndexReader().getRefCount() <= 0){
 			searcher = new IndexSearcher(r);
 			searcherMap.put(searcherName,searcher);
 		}
