@@ -16,7 +16,7 @@ public class WeiXinMsgService {
 	
 	public String doExcuteMsg(String xml){
 		if(xml==null)return "";
-		xml = StringUtil.getStringUTF8(xml);
+//		xml = StringUtil.getStringUTF8(xml);
 		logger.info("接收到的xml:"+xml);
 		return StringUtil.getStringISO88591(dispatch(xml));
 	}
