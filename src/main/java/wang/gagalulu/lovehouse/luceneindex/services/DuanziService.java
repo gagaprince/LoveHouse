@@ -49,6 +49,7 @@ public class DuanziService {
 	
 	private final String WRITER_NAME = "duanziServiceWriter";
 	private final String DUANZI_SEARCHER = "duanziServiceSearcher"; 
+	private final String READER_NAME = "duanziServiceReader";
 	
 	public String createDuanziIndex() throws IOException{
 		long allCount = duanziDao.getAllCount();
@@ -92,7 +93,7 @@ public class DuanziService {
 	}
 	
 	public String IWantOneDuanzi(String key) throws CorruptIndexException, IOException, ParseException{
-		DirectoryReader reader = luceneConfig.getIndexReader();
+		DirectoryReader reader = luceneUtil.getDirectoryIndexReader(READER_NAME, luceneConfig.getDuanziIndexPath());
         IndexSearcher searcher = luceneUtil.getSearcher(DUANZI_SEARCHER, reader);    
           
         ScoreDoc[] hits = null;    

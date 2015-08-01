@@ -48,6 +48,8 @@ public class QaSearchService {
 
 	private final String WRITER_NAME = "qaSearchIndexWriter";
 	private final String QA_SEARCHER = "qaSearchSearcher";
+	private final String READER_NAME = "qaSearchIndexReader";
+	
 	
 	@PostConstruct
 	public void createIfNotIndex(){
@@ -144,7 +146,7 @@ public class QaSearchService {
 	}
 	
 	public AnswerBean IWantOneAnswer(String key) throws CorruptIndexException, IOException, ParseException{
-		DirectoryReader reader = luceneConfig.getQaIndexReader();
+		DirectoryReader reader = luceneUtil.getDirectoryIndexReader(READER_NAME, luceneConfig.getQaIndexPath());
 //        IndexSearcher searcher = new IndexSearcher(reader);    
 		IndexSearcher searcher = luceneUtil.getSearcher(QA_SEARCHER,reader);
           
