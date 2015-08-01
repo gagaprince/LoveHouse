@@ -18,15 +18,12 @@ import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriterConfig;
-import org.apache.lucene.index.IndexWriterConfig.OpenMode;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.lionsoul.jcseg.analyzer.JcsegAnalyzer5X;
 import org.lionsoul.jcseg.core.JcsegTaskConfig;
@@ -36,6 +33,7 @@ import org.springframework.stereotype.Service;
 import wang.gagalulu.lovehouse.bean.pojo.DuanZiModel;
 import wang.gagalulu.lovehouse.dao.DuanziDao;
 import wang.gagalulu.lovehouse.luceneindex.config.LuceneConfig;
+import wang.gagalulu.lovehouse.util.LuceneUtil;
 
 
 @Service
@@ -46,6 +44,11 @@ public class DuanziService {
 	private DuanziDao duanziDao;
 	@Autowired
 	private LuceneConfig luceneConfig; 
+	@Autowired
+	private LuceneUtil luceneUtil;
+	
+	private final String WRITER_NAME = "duanziServiceWriter";
+	private final String DUANZI_SEARCHER = "duanziServiceSearcher"; 
 	
 	public String createDuanziIndex() throws IOException{
 		long allCount = duanziDao.getAllCount();
@@ -53,12 +56,7 @@ public class DuanziService {
 		int length = 10000;
 		 /* 这里放索引文件的位置 */    
 //        File indexDir = new File(luceneConfig.getDuanziIndexPath());    
-        Directory dir = FSDirectory.open(Paths.get(luceneConfig.getDuanziIndexPath()));  
-        Analyzer luceneAnalyzer = giveMeAnalyzer();
-        
-        IndexWriterConfig iwc = new IndexWriterConfig(luceneAnalyzer);  
-        iwc.setOpenMode(OpenMode.CREATE);  
-        IndexWriter indexWriter = new IndexWriter(dir,iwc);    
+        IndexWriter indexWriter = luceneUtil.getIndexWriter(WRITER_NAME, luceneConfig.getDuanziIndexPath());
 		while(begin<allCount){
 			Map<String,Object> params = new HashMap<String,Object>();
 			params.put("fromIndex", begin);
@@ -78,18 +76,6 @@ public class DuanziService {
 		return "建立索引完毕";
 	}
 	
-	private Analyzer giveMeAnalyzer(){
-		Analyzer luceneAnalyzer = new JcsegAnalyzer5X(JcsegTaskConfig.COMPLEX_MODE);
-        JcsegAnalyzer5X jcseg = (JcsegAnalyzer5X) luceneAnalyzer;
-        JcsegTaskConfig jcsegTaskConfig = jcseg.getTaskConfig();  
-        jcsegTaskConfig.setAppendCJKPinyin(true);  
-        jcsegTaskConfig.setAppendCJKSyn(true); 
-        
-//      Analyzer luceneAnalyzer = new StandardAnalyzer(Version.LUCENE_36);  
-        
-        return luceneAnalyzer;
-	}
-	
 	public void createIndexByList(List<DuanZiModel> duanziList,IndexWriter indexWriter) throws CorruptIndexException, IOException{
         //增加document到索引去    
         for (int i = 0; i < duanziList.size(); i++) { 
@@ -107,14 +93,14 @@ public class DuanziService {
 	
 	public String IWantOneDuanzi(String key) throws CorruptIndexException, IOException, ParseException{
 		DirectoryReader reader = luceneConfig.getIndexReader();
-        IndexSearcher searcher = new IndexSearcher(reader);    
+        IndexSearcher searcher = luceneUtil.getSearcher(DUANZI_SEARCHER, reader);    
           
         ScoreDoc[] hits = null;    
         String queryString = key;   //搜索的关键词  
         String result = "";
         Query query = null;    
         
-        Analyzer luceneAnalyzer = giveMeAnalyzer();
+        Analyzer luceneAnalyzer = luceneUtil.giveMeAnalyzer();
         
         QueryParser qp = new QueryParser("content", luceneAnalyzer);    
         query = qp.parse(queryString);    
@@ -145,7 +131,6 @@ public class DuanziService {
           
         ScoreDoc[] hits = null;    
         String queryString = "的";   //搜索的关键词  
-        String result = "";
         Query query = null;    
         
         Analyzer luceneAnalyzer = new JcsegAnalyzer5X(JcsegTaskConfig.COMPLEX_MODE);
@@ -172,7 +157,6 @@ public class DuanziService {
             	System.out.println("选中的结果评分为："+selectDoc.score);
             	if(selectDoc.score>1){
             		Document hitDoc = searcher.doc(selectDoc.doc);
-                    result = hitDoc.get("content");
                     System.out.println(hitDoc.get("id")+"-------"+hitDoc.get("content")+"----"+hitDoc.get("date")); 
             	}
                 System.out.println("找到:" + hits.length + " 个结果!");    

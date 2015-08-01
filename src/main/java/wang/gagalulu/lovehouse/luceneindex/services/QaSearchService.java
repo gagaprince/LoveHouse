@@ -1,14 +1,11 @@
 package wang.gagalulu.lovehouse.luceneindex.services;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.Analyzer;
@@ -21,18 +18,12 @@ import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriterConfig;
-import org.apache.lucene.index.IndexWriterConfig.OpenMode;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
-import org.lionsoul.jcseg.analyzer.JcsegAnalyzer5X;
-import org.lionsoul.jcseg.core.JcsegTaskConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +31,7 @@ import wang.gagalulu.lovehouse.bean.pojo.AnswerBean;
 import wang.gagalulu.lovehouse.dao.QaDao;
 import wang.gagalulu.lovehouse.luceneindex.config.LuceneConfig;
 import wang.gagalulu.lovehouse.util.FileUtils;
+import wang.gagalulu.lovehouse.util.LuceneUtil;
 
 @Service
 public class QaSearchService {
@@ -48,11 +40,14 @@ public class QaSearchService {
 	@Autowired
 	private LuceneConfig luceneConfig;
 	@Autowired
+	private LuceneUtil luceneUtil;
+	@Autowired
 	private FileUtils fileUtils;
 	@Autowired
 	private QaDao qaDao;
-	
-	private IndexWriter indexWriter;
+
+	private final String WRITER_NAME = "qaSearchIndexWriter";
+	private final String QA_SEARCHER = "qaSearchSearcher";
 	
 	@PostConstruct
 	public void createIfNotIndex(){
@@ -76,12 +71,12 @@ public class QaSearchService {
 		long allCount = qaDao.getAllCount();
 		long begin = 0;
 		int length = 10000;
-		Directory dir = FSDirectory.open(Paths.get(luceneConfig.getQaIndexPath()));  
+		/*Directory dir = FSDirectory.open(Paths.get(luceneConfig.getQaIndexPath()));  
         Analyzer luceneAnalyzer = giveMeAnalyzer();
         
         IndexWriterConfig iwc = new IndexWriterConfig(luceneAnalyzer);  
-        iwc.setOpenMode(OpenMode.CREATE);  
-        IndexWriter indexWriter = new IndexWriter(dir,iwc);    
+        iwc.setOpenMode(OpenMode.CREATE); */ 
+        IndexWriter indexWriter = giveMeWriter();
 		while(begin<allCount){
 			Map<String,Object> params = new HashMap<String,Object>();
 			params.put("fromIndex", begin);
@@ -98,7 +93,10 @@ public class QaSearchService {
 			begin+=length;
 		}
 		indexWriter.commit();
-		indexWriter.close();
+	}
+	
+	private IndexWriter giveMeWriter() throws IOException{
+		return luceneUtil.getIndexWriter(WRITER_NAME, luceneConfig.getQaIndexPath());
 	}
 	
 	public void createIndexByList(List<AnswerBean> answerBeanList,IndexWriter indexWriter) throws CorruptIndexException, IOException{
@@ -107,18 +105,6 @@ public class QaSearchService {
         	AnswerBean answerBean = answerBeanList.get(i);  
         	addOneQaInIndex(answerBean, indexWriter);
         }    
-	}
-	
-	private Analyzer giveMeAnalyzer(){
-		Analyzer luceneAnalyzer = new JcsegAnalyzer5X(JcsegTaskConfig.COMPLEX_MODE);
-        JcsegAnalyzer5X jcseg = (JcsegAnalyzer5X) luceneAnalyzer;
-        JcsegTaskConfig jcsegTaskConfig = jcseg.getTaskConfig();  
-        jcsegTaskConfig.setAppendCJKPinyin(true);  
-        jcsegTaskConfig.setAppendCJKSyn(true); 
-        
-//      Analyzer luceneAnalyzer = new StandardAnalyzer(Version.LUCENE_36);  
-        
-        return luceneAnalyzer;
 	}
 	
 	//判断是否存在索引
@@ -149,7 +135,7 @@ public class QaSearchService {
 	
 	public void addOneQaInIndex(AnswerBean answerBean){
 		try {
-			IndexWriter indexWriter = getIndexWriter();
+			IndexWriter indexWriter = giveMeWriter();
 			addOneQaInIndex(answerBean, indexWriter);
 			indexWriter.commit();
 		} catch (IOException e) {
@@ -159,14 +145,15 @@ public class QaSearchService {
 	
 	public AnswerBean IWantOneAnswer(String key) throws CorruptIndexException, IOException, ParseException{
 		DirectoryReader reader = luceneConfig.getQaIndexReader();
-        IndexSearcher searcher = new IndexSearcher(reader);    
+//        IndexSearcher searcher = new IndexSearcher(reader);    
+		IndexSearcher searcher = luceneUtil.getSearcher(QA_SEARCHER,reader);
           
         ScoreDoc[] hits = null;    
         String queryString = key;   //搜索的关键词  
         AnswerBean result = null;
         Query query = null;    
         
-        Analyzer luceneAnalyzer = giveMeAnalyzer();
+        Analyzer luceneAnalyzer = luceneUtil.giveMeAnalyzer();
         
         QueryParser qp = new QueryParser("question", luceneAnalyzer);    
         query = qp.parse(queryString);    
@@ -190,30 +177,5 @@ public class QaSearchService {
             }
         }
         return result;
-	}
-	
-	
-	private IndexWriter getIndexWriter() throws IOException{
-		if(indexWriter==null){
-			Directory dir = FSDirectory.open(Paths.get(luceneConfig.getQaIndexPath()));  
-	        Analyzer luceneAnalyzer = giveMeAnalyzer();
-	        
-	        IndexWriterConfig iwc = new IndexWriterConfig(luceneAnalyzer);  
-	        iwc.setOpenMode(OpenMode.APPEND);  
-	        indexWriter = new IndexWriter(dir,iwc);
-		}
-		return indexWriter;
-	}
-	
-	@PreDestroy
-	public void destory(){
-		if(indexWriter != null){
-			try {
-				indexWriter.commit();
-				indexWriter.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 }
