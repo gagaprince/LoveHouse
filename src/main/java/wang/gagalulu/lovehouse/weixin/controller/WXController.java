@@ -55,6 +55,23 @@ public class WXController {
 		return rspStr;
 	}
 	
+	@RequestMapping(value = "/indexnew")
+	@ResponseBody
+	public String wxCallNew(HttpServletRequest request,@RequestBody String xml){
+		String rspStr = "";
+		String method = request.getMethod();
+		logger.info(method);
+		if("GET".equals(method)){
+			logger.info("新的号码要接入了");
+			//微信验证开发者
+			rspStr = wxInService.doExcuteInWeiXin(request);
+		}else if("POST".equals(method)){
+			//接收微信消息
+			rspStr = wxMsgService.doExcuteMsg(request,xml);
+		}
+		return rspStr;
+	}
+	
 	@RequestMapping(value = "/getToken", method = RequestMethod.GET)
 	@ResponseBody
 	public String getWeiXinAccessToken(HttpServletRequest request, Model model){
