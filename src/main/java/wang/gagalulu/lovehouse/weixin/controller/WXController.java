@@ -43,6 +43,7 @@ public class WXController {
 	public String wxCall(HttpServletRequest request,@RequestBody String xml){
 		String rspStr = "";
 		String method = request.getMethod();
+		logger.info(method);
 		if("GET".equals(method)){
 			logger.info("新的号码要接入了");
 			//微信验证开发者
