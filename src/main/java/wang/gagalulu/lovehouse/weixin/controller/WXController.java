@@ -1,12 +1,15 @@
 package wang.gagalulu.lovehouse.weixin.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,7 +43,7 @@ public class WXController {
 	
 	@RequestMapping(value = "/index")
 	@ResponseBody
-	public String wxCall(HttpServletRequest request,@RequestBody String xml){
+	public String wxCall(HttpServletRequest request){
 		String rspStr = "";
 		String method = request.getMethod();
 		logger.info(method);
@@ -49,8 +52,14 @@ public class WXController {
 			//微信验证开发者
 			rspStr = wxInService.doExcuteInWeiXin(request);
 		}else if("POST".equals(method)){
+			String xml=null;
+			try {
+				xml = getRequestBody(request);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			//接收微信消息
-			rspStr = wxMsgService.doExcuteMsg(request,xml);
+			rspStr = wxMsgService.doExcuteMsg(xml);
 		}
 		return rspStr;
 	}
@@ -74,5 +83,17 @@ public class WXController {
 	public String getWeiXinIps(HttpServletRequest request, Model model){
 		WXIps wxIps = wxService.iNeedWxIps();
 		return JSON.toJSONString(wxIps);
+	}
+	
+	private String getRequestBody(HttpServletRequest request) throws IOException{
+		InputStreamReader isr = new InputStreamReader(request.getInputStream());
+		BufferedReader br = new BufferedReader(isr);
+		StringBuffer sb = new StringBuffer("");
+		String line = null;
+		while((line=br.readLine())!=null){
+			sb.append(line);
+		}
+		br.close();
+		return sb.toString();
 	}
 }

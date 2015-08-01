@@ -1,7 +1,5 @@
 package wang.gagalulu.lovehouse.weixin.services;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.log4j.Logger;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,8 @@ public class WeiXinMsgService {
 	@Autowired
 	private MsgCenterFactory msgCenterFactory;
 	
-	public String doExcuteMsg(HttpServletRequest request,String xml){
+	public String doExcuteMsg(String xml){
+		if(xml==null)return "";
 		xml = StringUtil.getStringUTF8(xml);
 		logger.info("接收到的xml:"+xml);
 		return StringUtil.getStringISO88591(dispatch(xml));
