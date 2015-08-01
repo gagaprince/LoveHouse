@@ -2,6 +2,7 @@ package wang.gagalulu.lovehouse.weixin.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,12 +36,15 @@ public class WXController {
 	@Autowired
 	private WeiXinMsgService wxMsgService;
 	
+	private static final Logger logger =  Logger.getLogger(WXController.class);
+	
 	@RequestMapping(value = "/index")
 	@ResponseBody
 	public String wxCall(HttpServletRequest request,@RequestBody String xml){
 		String rspStr = "";
 		String method = request.getMethod();
 		if("GET".equals(method)){
+			logger.info("新的号码要接入了");
 			//微信验证开发者
 			rspStr = wxInService.doExcuteInWeiXin(request);
 		}else if("POST".equals(method)){

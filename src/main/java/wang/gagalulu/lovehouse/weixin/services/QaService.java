@@ -67,6 +67,7 @@ public class QaService {
 		return answerBean;
 	}
 	
+	@SuppressWarnings("unused")
 	private AnswerBean getAnswerByQuestion(String question){
 		HashMap<String,Object> params = new HashMap<String,Object>();
 		params.put("question", question);
