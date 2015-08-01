@@ -40,7 +40,7 @@ public class WXController {
 	
 	@RequestMapping(value = "/index")
 	@ResponseBody
-	public String wxCall(HttpServletRequest request,@RequestBody String xml){
+	public String wxCall(HttpServletRequest request,String xml){
 		String rspStr = "";
 		String method = request.getMethod();
 		logger.info(method);
