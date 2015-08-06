@@ -3,11 +3,12 @@ package wang.gagalulu.lovehouse.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+@Controller
 @RequestMapping("/lovelulu/log")
 public class LogController {
 	private static final Logger logger =  Logger.getLogger(LogController.class);
