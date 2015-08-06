@@ -78,6 +78,14 @@ public class WXController {
 		return wxAccessToken.getAccessToken();
 	}
 	
+	@RequestMapping(value = "/getTicket", method = RequestMethod.GET)
+	@ResponseBody
+	public String getJsapiTicket(HttpServletRequest request){
+		String ticket = wxService.getCanUseTicket();
+		return ticket;
+	}
+	
+	
 	@RequestMapping(value = "/getWeiXinIps", method = RequestMethod.GET)
 	@ResponseBody
 	public String getWeiXinIps(HttpServletRequest request, Model model){

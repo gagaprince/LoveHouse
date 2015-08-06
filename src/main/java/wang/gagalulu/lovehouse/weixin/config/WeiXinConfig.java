@@ -20,6 +20,18 @@ public class WeiXinConfig {
 	
 	private WXAccessToken wxAccessToken;
 	private WXbasic wxBasic;
+	
+	private String jsapiTicket;
+	
+	public String getJsapiTicket() {
+		return jsapiTicket;
+	}
+
+	public void setJsapiTicket(String jsapiTicket) {
+		this.jsapiTicket = jsapiTicket;
+	}
+
+	private String jsapiTicketGetUrl ;
 	@Autowired
 	private WeiXinDaoService wxDaoService;
 	
@@ -44,10 +56,23 @@ public class WeiXinConfig {
 		} catch (ConfigurationException e) {
 			e.printStackTrace();
 		}
+		initData();
 		initToken();
 		logger.info("weixin config init end");
 	}
 	
+	private void initData(){
+		jsapiTicketGetUrl = get("jsapi_ticket_url");
+	}
+	
+	public String getJsapiTicketGetUrl() {
+		return jsapiTicketGetUrl;
+	}
+
+	public void setJsapiTicketGetUrl(String jsapiTicketGetUrl) {
+		this.jsapiTicketGetUrl = jsapiTicketGetUrl;
+	}
+
 	private void initToken(){
 		wxAccessToken = wxDaoService.getWXAccessTokenFromDb();
 	}

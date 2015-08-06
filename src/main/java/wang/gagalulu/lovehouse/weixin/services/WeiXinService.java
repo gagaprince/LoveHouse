@@ -12,6 +12,7 @@ import wang.gagalulu.lovehouse.weixin.bean.WXAccessToken;
 import wang.gagalulu.lovehouse.weixin.bean.WXIps;
 import wang.gagalulu.lovehouse.weixin.bean.WXbasic;
 import wang.gagalulu.lovehouse.weixin.config.WeiXinConfig;
+import wang.gagalulu.lovehouse.weixin.services.WeiXinErrorService.ErrorCallBack;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -22,6 +23,8 @@ public class WeiXinService {
 	private WeiXinDaoService wxDaoService;
 	@Autowired
 	private WeiXinConfig wxConfig;
+	@Autowired
+	private WeiXinErrorService wxErrorService;
 	
 	private static final Logger logger =  Logger.getLogger(WeiXinService.class);
 	/**
@@ -33,6 +36,12 @@ public class WeiXinService {
 		getWeiXinAccessToken(wxToken);
 		return wxToken;
 	}
+	public String iNeedTicket(){
+		WXAccessToken wxToken = getCanUseToken();
+		String ticket = getJsapiTicketFromHttp(wxToken);
+		return ticket;
+	}
+	
 	/**
 	 * 通过http请求获取token完整信息
 	 */
@@ -51,6 +60,27 @@ public class WeiXinService {
 		}
 		
 	}
+	//获取jsapiticket 通过http
+	private String getJsapiTicketFromHttp(WXAccessToken wxAccessToken){
+		String url = getWeixinJsTecketUrl(wxAccessToken);
+		String result = HttpUtil.getContentByUrl(url);
+		logger.info("get weixin jsapiticket :" +result);
+		JSONObject ticket = JSONObject.parseObject(result);
+		String ticketStr = ticket.getString("ticket");
+		if(ticketStr==null){
+			ticketStr = (String)wxErrorService.filter(ticket.getIntValue("errcode"),new ErrorCallBack() {
+				@Override
+				public Object onErrorFinish() {
+					return iNeedTicket();
+				}
+			});
+			logger.error((String)ticket.get("errmsg"));
+		}else{
+			wxConfig.setJsapiTicket(ticketStr);
+		}
+		return ticketStr;
+	}
+	
 	/**
 	 * 获取一个微信基本信息bean
 	 * @return
@@ -81,6 +111,10 @@ public class WeiXinService {
 		return url;
 	}
 	
+	private String getWeixinJsTecketUrl(WXAccessToken wxAccessToken){
+		return wxConfig.getJsapiTicketGetUrl()+"?access_token="+wxAccessToken.getAccessToken()+"&type=jsapi";
+	}
+	
 	public WXIps iNeedWxIps(){
 		WXAccessToken wxAccessToken = getCanUseToken();
 		WXIps wxIps = new WXIps();
@@ -106,6 +140,14 @@ public class WeiXinService {
 		}else{
 			logger.error((String)ipsJson.get("errmsg"));
 		}
+	}
+	
+	public String getCanUseTicket(){
+		String ticket = wxConfig.getJsapiTicket();
+		if(ticket==null){
+			ticket = iNeedTicket();
+		}
+		return ticket;
 	}
 	
 	public WXAccessToken getCanUseToken(){
