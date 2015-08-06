@@ -20,9 +20,9 @@ public class LogController {
 	}
 	
 	public String getRemortIP(HttpServletRequest request) {
-		if (request.getHeader("x-forwarded-for") == null) {
+//		if (request.getHeader("x-forwarded-for") == null) {
 			return request.getRemoteAddr();
-		}
-		return request.getHeader("x-forwarded-for");
+//		}
+//		return request.getHeader("x-forwarded-for");
 	}
 }
