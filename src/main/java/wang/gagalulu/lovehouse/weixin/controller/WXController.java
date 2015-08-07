@@ -88,6 +88,7 @@ public class WXController {
 	@RequestMapping(value = "/reloadTicket", method = RequestMethod.GET)
 	@ResponseBody
 	public String reloadJsapiTicket(HttpServletRequest request){
+		wxService.reloadTicket();
 		String ticket = wxService.getCanUseTicket();
 		return ticket;
 	}
@@ -96,7 +97,6 @@ public class WXController {
 	@RequestMapping(value = "/getWeiXinIps", method = RequestMethod.GET)
 	@ResponseBody
 	public String getWeiXinIps(HttpServletRequest request, Model model){
-		wxService.reloadTicket();
 		WXIps wxIps = wxService.iNeedWxIps();
 		return JSON.toJSONString(wxIps);
 	}
