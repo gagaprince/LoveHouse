@@ -9,6 +9,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import wang.gagalulu.lovehouse.bean.pojo.JsapiTicket;
+import wang.gagalulu.lovehouse.dao.JSapiTicketDao;
 import wang.gagalulu.lovehouse.weixin.bean.WXAccessToken;
 import wang.gagalulu.lovehouse.weixin.bean.WXbasic;
 import wang.gagalulu.lovehouse.weixin.services.WeiXinDaoService;
@@ -34,6 +36,8 @@ public class WeiXinConfig {
 	private String jsapiTicketGetUrl ;
 	@Autowired
 	private WeiXinDaoService wxDaoService;
+	@Autowired
+	private JSapiTicketDao jsapiTicketDao;
 	
 	public WXbasic getWxBasic() {
 		if(wxBasic==null){
@@ -57,12 +61,13 @@ public class WeiXinConfig {
 			e.printStackTrace();
 		}
 		initData();
-		initToken();
 		logger.info("weixin config init end");
 	}
 	
 	private void initData(){
 		jsapiTicketGetUrl = get("jsapi_ticket_url");
+		initTicket();
+		initToken();
 	}
 	
 	public String getJsapiTicketGetUrl() {
@@ -73,6 +78,13 @@ public class WeiXinConfig {
 		this.jsapiTicketGetUrl = jsapiTicketGetUrl;
 	}
 
+	private void initTicket(){
+		JsapiTicket ticketModel = jsapiTicketDao.getLastestTicket();
+		if(ticketModel!=null){
+			jsapiTicket = ticketModel.getTicket();
+		}
+	}
+	
 	private void initToken(){
 		wxAccessToken = wxDaoService.getWXAccessTokenFromDb();
 	}

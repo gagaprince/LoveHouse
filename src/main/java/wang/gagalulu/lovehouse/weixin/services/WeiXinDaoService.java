@@ -5,7 +5,9 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import wang.gagalulu.lovehouse.bean.pojo.JsapiTicket;
 import wang.gagalulu.lovehouse.bean.pojo.WeiXinToken;
+import wang.gagalulu.lovehouse.dao.JSapiTicketDao;
 import wang.gagalulu.lovehouse.dao.WeiXinTokenDao;
 import wang.gagalulu.lovehouse.weixin.bean.WXAccessToken;
 
@@ -13,6 +15,9 @@ import wang.gagalulu.lovehouse.weixin.bean.WXAccessToken;
 public class WeiXinDaoService {
 	@Autowired
 	private WeiXinTokenDao wxTokenDao;
+	
+	@Autowired
+	private JSapiTicketDao jsapiTicketDao;
 	
 	public void saveTokenInDb(WXAccessToken wxAccessToken){
 		WeiXinToken wxToken = new WeiXinToken();
@@ -29,5 +34,12 @@ public class WeiXinDaoService {
 		WXAccessToken wxAccessToken = new WXAccessToken();
 		wxAccessToken.setAccessToken(wxToken.getToken());
 		return wxAccessToken;
+	}
+	
+	public void saveTicketInDb(String ticket){
+		JsapiTicket ticketModel = new JsapiTicket();
+		ticketModel.setTicket(ticket);
+		ticketModel.setCreateTime(new Date());
+		jsapiTicketDao.save(ticketModel);
 	}
 }

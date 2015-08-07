@@ -39,6 +39,7 @@ public class WeiXinService {
 	public String iNeedTicket(){
 		WXAccessToken wxToken = getCanUseToken();
 		String ticket = getJsapiTicketFromHttp(wxToken);
+		wxDaoService.saveTicketInDb(ticket);
 		return ticket;
 	}
 	
@@ -165,5 +166,8 @@ public class WeiXinService {
 	
 	public void reloadToken(){
 		wxConfig.setAccessToken(null);
+	}
+	public void reloadTicket(){
+		wxConfig.setJsapiTicket(null);
 	}
 }
