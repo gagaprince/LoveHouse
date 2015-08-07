@@ -26,7 +26,7 @@ public class WeiXinShareService {
 	private static final Logger logger =  Logger.getLogger(WeiXinShareService.class);
 	public WXShareConfigModel getCanUseShareConfig(HttpServletRequest request){
 		String url = getUrlFromReq(request);
-		logger.info("url:"+url);
+//		logger.info("url:"+url);
 		WXShareConfigModel shareModel = new WXShareConfigModel();
 		shareModel.setAppId(wxConfig.getWxBasic().getAppId());
 		shareModel.setTimestamp(new Date().getTime()+"");
