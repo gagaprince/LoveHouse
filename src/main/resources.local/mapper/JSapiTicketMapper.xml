@@ -28,7 +28,7 @@
 	</insert>
 	
 	
-	<select id="getLastestToken" parameterType="map"  resultMap="JsapiTicketResultMap">
+	<select id="getLastestTicket" parameterType="map"  resultMap="JsapiTicketResultMap">
 		SELECT * FROM weixin_ticket ORDER BY create_time	DESC LIMIT 1
 	</select>
 </mapper>
