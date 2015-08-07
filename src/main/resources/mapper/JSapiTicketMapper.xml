@@ -12,7 +12,7 @@
 	<insert id="save"
 		parameterType="JsapiTicket"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into weixin_token(
+		insert into weixin_ticket(
 		<trim suffixOverrides=",">
 			<if test="id != null"> id ,</if>
 			<if test="ticket != null"> ticket ,</if>
