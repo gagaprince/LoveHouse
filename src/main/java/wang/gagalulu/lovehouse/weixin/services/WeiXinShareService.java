@@ -20,23 +20,38 @@ import wang.gagalulu.lovehouse.weixin.config.WeiXinConfig;
 public class WeiXinShareService {
 	@Autowired
 	private WeiXinConfig wxConfig;
+	@Autowired
+	private WeiXinService wxService;
 	
 	private static final Logger logger =  Logger.getLogger(WeiXinShareService.class);
 	public WXShareConfigModel getCanUseShareConfig(HttpServletRequest request){
-		String url = request.getRequestURL().toString();
+		String url = getUrlFromReq(request);
 		logger.info("url:"+url);
 		WXShareConfigModel shareModel = new WXShareConfigModel();
 		shareModel.setAppId(wxConfig.getWxBasic().getAppId());
 		shareModel.setTimestamp(new Date().getTime()+"");
 		shareModel.setNonceStr(getRandomString());
 		shareModel.setUrl(url);
+		shareModel.setTicket(wxService.getCanUseTicket());
 		signat(shareModel);
 		return shareModel;
 	}
 	
+	private String getUrlFromReq(HttpServletRequest request){
+		String uri = request.getRequestURL().toString();
+		String search = request.getQueryString();
+		String url = "";
+		if(search==null||"".equals(search)){
+			url = uri;
+		}else{
+			url = uri+"?"+search;
+		}
+		return url;
+	}
+	
 	private void signat(WXShareConfigModel shareModel){
 		List<String> signList = new ArrayList<String>();
-		signList.add(shareModel.getAppId());
+		signList.add(shareModel.getTicket());
 		signList.add(shareModel.getNonceStr());
 		signList.add(shareModel.getTimestamp());
 		signList.add(shareModel.getUrl());

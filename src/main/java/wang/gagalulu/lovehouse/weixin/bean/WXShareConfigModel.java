@@ -11,6 +11,13 @@ public class WXShareConfigModel {
 	private String nonceStr;
 	private String signature;
 	private String url;
+	private String ticket;
+	public String getTicket() {
+		return ticket;
+	}
+	public void setTicket(String ticket) {
+		this.ticket = ticket;
+	}
 	public String getUrl() {
 		return url;
 	}
