@@ -32,81 +32,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     欢迎光临<c:out value="${name}"></c:out>的s小屋
-	<button id="postBtn">postTest</button> 
   </body>
   <script type="text/javascript" src="/fe/js/lib/zepto-1.1.4.js"></script>
   <script>
-  	var api = (function(){
-    /**
-     * @param useMock {Boolean} 是否使用测试桩。
-     */
-    return function(t, params, callback, useMock,method){
-        if(!callback){
-            callback=$.noop;
-        }
-
-        var doneFns=[];
-        var stepFns=[callback];
-
-        var e={
-            done:function(fn){
-                doneFns.push(fn);
-                return this;
-            },
-            on:function(fn){
-                stepFns.push(fn);
-                return this;
-            },
-            resolve:function(){
-                e.status='done';
-                for (var i = 0; i < doneFns.length; i++) {
-                    doneFns[i].apply(e,arguments);
-                }
-                return this;
-            }
-        };
-        var ajaxOption={
-            url : t,
-            type : method||'GET',
-            data : params,
-            contentType:"application/json; charset=UTF-8",
-            dataType : 'json',
-            timeout : 3e4,
-            success : function(res){
-                // 当接口挂了
-                e.status='';
-                for (var i = 0; i < stepFns.length; i++) {
-                    stepFns[i].call(e,res.bstatus&&res.bstatus.code==0,res.bstatus&&res.bstatus.des,res.data,res);
-                }
-            },
-            error : function(res){
-                e.status='fail';
-                // time out 的status 也是0
-                for (var i = 0; i < stepFns.length; i++) {
-                    stepFns[i].call(e,-res.status||-1,'网络错误',res.responseText);
-                }
-            }
-        };
-        if(useMock){// 使用测试桩数据
-            ajaxOption.url = '/pc/js/mock/' + t + '.json' + '?rdm=' + Math.random();
-            ajaxOption.type = 'GET';
-        }
-        e.retry=function(){
-            if(e.status==='loading'){
-                return;
-            }
-            e.status='loading';
-            e.ajax=$.ajax(ajaxOption);
-            return this;
-        };
-
-        e.retry();
-        return e;
-    };
-})();
-	var data = '<xml> <ToUserName><![CDATA[toUser]]></ToUserName> <FromUserName><![CDATA[fromUser]]></FromUserName> <CreateTime>1348831860</CreateTime> <MsgType><![CDATA[image]]></MsgType> <PicUrl><![CDATA[this is a url]]></PicUrl> <MediaId><![CDATA[media_id]]></MediaId> <MsgId>1234567890123456</MsgId> </xml>';
-  	api("/lovelulu/wx/index",data,function(flag,des,data,res){
-  		
-  	},false,"POST");
+  	var wxShareConfig = ${wxShareConfig};
   </script>
 </html>
