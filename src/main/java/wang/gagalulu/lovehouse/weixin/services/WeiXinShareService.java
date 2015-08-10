@@ -68,8 +68,9 @@ public class WeiXinShareService {
 			sb.append("&");
 		}
 		String desStr = sb.deleteCharAt(sb.length()-1).toString();
-		logger.info("排序后的字串"+desStr);
+		logger.info("排序后的字串："+desStr);
 		desStr = DigestUtils.sha1Hex(desStr);
+		logger.info("加密后的字串："+desStr);
 		shareModel.setSignature(desStr);
 	}
 	
@@ -77,4 +78,10 @@ public class WeiXinShareService {
 		int randomValue = new Random().nextInt(1000);
 		return DigestUtils.md5Hex(randomValue+"").substring(0,16);
 	}
+	
+	public static void main(String[] args) {
+		String str = DigestUtils.sha1Hex("jsapi_ticket=sM4AOVdWfPE4DxkXGEs8VIl4OE1KcC-kTCeDsjE5jqNAO0tvkWiC7_voDwtbODArkgnIhJz68fDbmGufCBhI2g&noncestr=50c3d7614917b243&timestamp=1439217856&url=http://gagalulu.wang/lovelulu/index");
+		System.out.println(str);
+	}
+	
 }
