@@ -16,17 +16,20 @@
 	    ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 	});
 	wx.ready(function(){
-		
+		onWXReady();
 	});
 	wx.error(function(res){
 	    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
 	});
-	wx.checkJsApi({
-	    jsApiList: ['onMenuShareTimeline'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-	    success: function(res) {
-	    	alert(JSON.stringify(res));
-	        // 以键值对的形式返回，可用的api值true，不可用为false
-	        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-	    }
-	});
+	function onWXReady(){
+		wx.checkJsApi({
+		    jsApiList: ['onMenuShareTimeline'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+		    success: function(res) {
+		    	alert(JSON.stringify(res));
+		        // 以键值对的形式返回，可用的api值true，不可用为false
+		        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+		    }
+		});
+	}
+	
 </script>
