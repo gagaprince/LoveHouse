@@ -38,7 +38,7 @@ public class WeiXinShareService {
 	}
 	
 	private String getUrlFromReq(HttpServletRequest request){
-		String uri = request.getRequestURL().toString();
+		String uri = "http://"+wxConfig.getWxShareHost()+request.getRequestURI();
 		String search = request.getQueryString();
 		String url = "";
 		if(search==null||"".equals(search)){

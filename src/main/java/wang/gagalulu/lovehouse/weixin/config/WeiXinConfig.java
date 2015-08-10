@@ -22,7 +22,16 @@ public class WeiXinConfig {
 	
 	private WXAccessToken wxAccessToken;
 	private WXbasic wxBasic;
+	private String wxShareHost;
 	
+	public String getWxShareHost() {
+		return wxShareHost;
+	}
+
+	public void setWxShareHost(String wxShareHost) {
+		this.wxShareHost = wxShareHost;
+	}
+
 	private String jsapiTicket;
 	
 	public String getJsapiTicket() {
@@ -66,6 +75,7 @@ public class WeiXinConfig {
 	
 	private void initData(){
 		jsapiTicketGetUrl = get("jsapi_ticket_url");
+		wxShareHost = get("AppHost");
 		initTicket();
 		initToken();
 	}
