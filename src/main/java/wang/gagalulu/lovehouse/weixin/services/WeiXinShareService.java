@@ -30,7 +30,7 @@ public class WeiXinShareService {
 //		logger.info("url:"+url);
 		WXShareConfigModel shareModel = new WXShareConfigModel();
 		shareModel.setAppId(wxConfig.getWxBasic().getAppId());
-		shareModel.setTimestamp(new Date().getTime()+"");
+		shareModel.setTimestamp((new Date().getTime()/1000)+"");
 		shareModel.setNonceStr(getRandomString());
 		shareModel.setUrl(url);
 		shareModel.setTicket(wxService.getCanUseTicket());
@@ -80,7 +80,7 @@ public class WeiXinShareService {
 	}
 	
 	public static void main(String[] args) {
-		String str = DigestUtils.sha1Hex("jsapi_ticket=sM4AOVdWfPE4DxkXGEs8VIl4OE1KcC-kTCeDsjE5jqNAO0tvkWiC7_voDwtbODArkgnIhJz68fDbmGufCBhI2g&noncestr=50c3d7614917b243&timestamp=1439217856&url=http://gagalulu.wang/lovelulu/index");
+		String str = DigestUtils.sha1Hex("jsapi_ticket=sM4AOVdWfPE4DxkXGEs8VIl4OE1KcC-kTCeDsjE5jqNAO0tvkWiC7_voDwtbODArkgnIhJz68fDbmGufCBhI2&noncestr=49c9adb18e44be07&timestamp=1439218259&url=http://gagalulu.wang/lovelulu/index");
 		System.out.println(str);
 	}
 	
