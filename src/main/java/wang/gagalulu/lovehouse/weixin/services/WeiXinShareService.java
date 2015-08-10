@@ -1,10 +1,11 @@
 package wang.gagalulu.lovehouse.weixin.services;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -50,18 +51,24 @@ public class WeiXinShareService {
 	}
 	
 	private void signat(WXShareConfigModel shareModel){
-		List<String> signList = new ArrayList<String>();
-		signList.add(shareModel.getTicket());
-		signList.add(shareModel.getNonceStr());
-		signList.add(shareModel.getTimestamp());
-		signList.add(shareModel.getUrl());
-		Collections.sort(signList);
+		Map<String,String> params = new TreeMap<String, String>();
+		params.put("jsapi_ticket", shareModel.getTicket());
+		params.put("noncestr", shareModel.getNonceStr());
+		params.put("timestamp", shareModel.getTimestamp());
+		params.put("url", shareModel.getUrl());
+		
+		Set<String> keySet = params.keySet();
+
+		Iterator<String> it = keySet.iterator();
+		
 		StringBuffer sb = new StringBuffer("");
-		for(int i=0;i<signList.size();i++){
-			sb.append(signList.get(i));
+		while(it.hasNext()){
+			String key = it.next();
+			sb.append(key+"="+params.get(key));
 			sb.append("&");
 		}
 		String desStr = sb.deleteCharAt(sb.length()-1).toString();
+		logger.info("排序后的字串"+desStr);
 		desStr = DigestUtils.sha1Hex(desStr);
 		shareModel.setSignature(desStr);
 	}
