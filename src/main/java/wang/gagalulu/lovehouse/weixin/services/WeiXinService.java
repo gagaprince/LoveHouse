@@ -108,11 +108,14 @@ public class WeiXinService {
 	private String getWeixinAccessTokenUrl(WXAccessToken wxAccessToken){
 		WXbasic wxBasic = wxAccessToken.getwXbasic();
 		String url = wxAccessToken.getGetUrl()+"?grant_type="+wxAccessToken.getGrantType()+"&appid="+wxBasic.getAppId()+"&secret="+wxBasic.getAppSecret();
+		logger.info("token_url:"+url);
 		return url;
 	}
 	
 	private String getWeixinJsTecketUrl(WXAccessToken wxAccessToken){
-		return wxConfig.getJsapiTicketGetUrl()+"?access_token="+wxAccessToken.getAccessToken()+"&type=jsapi";
+		String url = wxConfig.getJsapiTicketGetUrl()+"?access_token="+wxAccessToken.getAccessToken()+"&type=jsapi";
+		logger.info("ticket_url:"+url);
+		return url;
 	}
 	
 	public WXIps iNeedWxIps(){
