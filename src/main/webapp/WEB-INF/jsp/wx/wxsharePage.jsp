@@ -4,8 +4,8 @@
   	var wxShareConfig = ${wxShareConfig};
   </script>
 <script>
-	alert("wxShareConfig url:"+wxShareConfig.url);
-	alert("current page url:"+location.href.split('#')[0]);
+	//alert("wxShareConfig url:"+wxShareConfig.url);
+	//alert("current page url:"+location.href.split('#')[0]);
 
 
 	wx.config({
