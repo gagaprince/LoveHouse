@@ -29,9 +29,29 @@
 		wx.checkJsApi({
 		    jsApiList: ['onMenuShareTimeline'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
 		    success: function(res) {
-		    	alert(JSON.stringify(res));
+		    	var result = res.checkResult;
+		    	if(result["onMenuShareTimeline"]){
+		    		initMenuShareListener();
+		    	}
 		        // 以键值对的形式返回，可用的api值true，不可用为false
 		        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+		    }
+		});
+	}
+	
+	function initMenuShareListener(){
+		wx.onMenuShareAppMessage({
+		    title: '王子冬love小璐璐', // 分享标题
+		    desc: '有点意思', // 分享描述
+		    link: 'http://www.baidu.com', // 分享链接
+		    imgUrl: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2117727038,2641018931&fm=116&gp=0.jpg', // 分享图标
+		    type: '', // 分享类型,music、video或link，不填默认为link
+		    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+		    success: function () { 
+		        
+		    },
+		    cancel: function () { 
+				
 		    }
 		});
 	}
