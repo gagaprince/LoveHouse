@@ -3,4 +3,4 @@
 <script>
   	var wxShareConfig = ${wxShareConfig};
   </script>
-<script src="fe/js/wx/wxjsbridge.js"></script>
+<script src="/fe/js/wx/wxjsbridge.js"></script>
