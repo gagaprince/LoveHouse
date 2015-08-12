@@ -31,7 +31,6 @@ var wxBridge = (function(wx,$){
 		    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
 		    success: function(res) {
 		    	var result = res.checkResult;
-                refresh();
 		    	if(result["onMenuShareTimeline"]){
                     initMenuShareTimelineListener();
 		    	}
@@ -58,22 +57,23 @@ var wxBridge = (function(wx,$){
     }
 
 	function initMenuShareTimelineListener(){
+        shareTimelineObj = $.extend(shareTimelineObj,shareObj);
 		wx.onMenuShareTimeline(shareTimelineObj);
-	}
-	
-	function initMenuShareAppListener(){
-		wx.onMenuShareAppMessage(shareAppMessageObj);
-	}
-	
-	
-	
-	//out function 
-	function setTitle(title){
-		shareObj["title"] = title||shareObj["title"];
-	}
-	function setDesc(desc){
-		shareObj["desc"] = desc||shareObj["desc"];
-	}
+    }
+
+    function initMenuShareAppListener(){
+        shareAppMessageObj = $.extend(shareAppMessageObj,shareObj);
+        wx.onMenuShareAppMessage(shareAppMessageObj);
+    }
+
+
+    //out function
+    function setTitle(title){
+        shareObj["title"] = title||shareObj["title"];
+    }
+    function setDesc(desc){
+        shareObj["desc"] = desc||shareObj["desc"];
+    }
     function setLink(link){
         shareObj["link"] = link||shareObj["link"];
     }
@@ -84,8 +84,8 @@ var wxBridge = (function(wx,$){
         shareObj = shareObjSet;
     }
     function refresh(){
-        shareTimelineObj = $.extend(shareTimelineObj,shareObj);
-        shareAppMessageObj = $.extend(shareAppMessageObj,shareObj);
+        initMenuShareTimelineListener();
+        initMenuShareAppListener();
     }
 
 	
