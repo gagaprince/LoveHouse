@@ -31,6 +31,7 @@ var wxBridge = (function(wx,$){
 		    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
 		    success: function(res) {
 		    	var result = res.checkResult;
+                refresh();
 		    	if(result["onMenuShareTimeline"]){
                     initMenuShareTimelineListener();
 		    	}
@@ -42,37 +43,26 @@ var wxBridge = (function(wx,$){
 		    }
 		});
 	}
-	
+
+    var shareTimelineObj ={
+        success: function () {
+        },
+        cancel: function () {
+        }
+    };
+    var shareAppMessageObj = {
+        success: function () {
+        },
+        cancel: function () {
+        }
+    }
+
 	function initMenuShareTimelineListener(){
-		wx.onMenuShareTimeline({
-		    title: shareObj["title"]||"", // 分享标题
-		    link: shareObj["link"]||"", // 分享链接
-		    imgUrl: shareObj["imgUrl"], // 分享图标
-		    success: function () { 
-		        
-		    },
-		    cancel: function () { 
-		        
-		    }
-		});
-	
+		wx.onMenuShareTimeline(shareTimelineObj);
 	}
 	
 	function initMenuShareAppListener(){
-		wx.onMenuShareAppMessage({
-		    title: shareObj["title"]||"", // 分享标题
-		    desc: shareObj["desc"]||"", // 分享描述
-		    link: shareObj["link"]||"", // 分享链接
-		    imgUrl: shareObj["imgUrl"], // 分享图标
-		    type: '', // 分享类型,music、video或link，不填默认为link
-		    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-		    success: function () { 
-		        
-		    },
-		    cancel: function () { 
-				
-		    }
-		});
+		wx.onMenuShareAppMessage(shareAppMessageObj);
 	}
 	
 	
@@ -80,7 +70,6 @@ var wxBridge = (function(wx,$){
 	//out function 
 	function setTitle(title){
 		shareObj["title"] = title||shareObj["title"];
-        alert(shareObj["title"]);
 	}
 	function setDesc(desc){
 		shareObj["desc"] = desc||shareObj["desc"];
@@ -94,13 +83,19 @@ var wxBridge = (function(wx,$){
     function setShareObj(shareObjSet){
         shareObj = shareObjSet;
     }
+    function refresh(){
+        shareTimelineObj = $.extend(shareTimelineObj,shareObj);
+        shareAppMessageObj = $.extend(shareAppMessageObj,shareObj);
+    }
+
 	
 	return {
         setTitle:setTitle,
         setDesc:setDesc,
         setLink:setLink,
         setImgUrl:setImgUrl,
-        setShareObj:setShareObj
+        setShareObj:setShareObj,
+        refresh:refresh
 	}
 	
 })(wx,$);
