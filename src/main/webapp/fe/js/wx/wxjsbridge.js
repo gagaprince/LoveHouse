@@ -30,10 +30,10 @@ var wxBridge = (function(wx,$){
 		    success: function(res) {
 		    	var result = res.checkResult;
 		    	if(result["onMenuShareTimeline"]){
-		    		initMenuShareTimelineListener();
+                    initMenuShareTimelineListener();
 		    	}
 				if(result["onMenuShareAppMessage"]){
-		    		initMenuShareTimelineListener();
+		    		initMenuShareAppListener();
 		    	}		    	
 		        // 以键值对的形式返回，可用的api值true，不可用为false
 		        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
@@ -56,7 +56,7 @@ var wxBridge = (function(wx,$){
 	
 	}
 	
-	function initMenuShareTimelineListener(){
+	function initMenuShareAppListener(){
 		wx.onMenuShareAppMessage({
 		    title: shareObj["title"]||"", // 分享标题
 		    desc: shareObj["desc"]||"", // 分享描述
