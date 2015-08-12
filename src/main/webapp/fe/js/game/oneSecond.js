@@ -1,11 +1,8 @@
 window.onload = function(){
-
     /*初始化*/
     var wWidth = document.documentElement.clientWidth;
     var wHeight = document.documentElement.clientHeight;
     var oBox = document.getElementById("box");
-    oBox.style.width = wWidth + 'px';
-    oBox.style.height = wHeight + 'px';
 
 
     var oBtn = document.getElementById("btn_bt");
@@ -14,7 +11,7 @@ window.onload = function(){
     var timeEnd = 0;
 
 
-    function absorbEvent_(event) {
+/*    function absorbEvent_(event) {
         var e = event || window.event;
         e.preventDefault && e.preventDefault();
         e.stopPropagation && e.stopPropagation();
@@ -28,7 +25,7 @@ window.onload = function(){
         node.ontouchend = absorbEvent_;
         node.ontouchcancel = absorbEvent_;
     }
-    preventLongPressMenu(oBtn);
+    preventLongPressMenu(oBtn);*/
 
     /*触摸事件*/
     oBtn.addEventListener("touchstart",function(){
@@ -89,4 +86,28 @@ window.onload = function(){
     divShare.addEventListener("touchstart",function(){
         this.style.display = "none";
     },false);
+    var zhuangbiNum = 0;
+    $("#share_zhuangbi").click(function(){
+        zhuangbiNum++;
+        if(zhuangbiNum>=3){
+            $(this).hide();
+            $("#zhuangbiFrame").show();
+        }
+    });
+    $("#zhuangyixia").click(function(){
+        var title = $("#zhuangbi_text").val();
+        if(title!=""){
+            divShare.style.display = "block";
+            document.addEventListener("touchmove",function(){
+                divShare.style.display = "none";
+            },false);
+            var imgUrl = "http://cgzp.cdn.novorunning.com/second/images/big_icon.jpg";
+            wxBridge.setImgUrl(imgUrl);
+            wxBridge.setTitle(title);
+            wxBridge.setDesc("你能精确地按出一秒吗？");
+            wxBridge.refresh();
+        }else{
+            alert("先输入文字亲~~~");
+        }
+    });
 }
