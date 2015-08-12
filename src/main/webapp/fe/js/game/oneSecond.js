@@ -11,7 +11,7 @@ window.onload = function(){
     var timeEnd = 0;
 
 
-/*    function absorbEvent_(event) {
+    function absorbEvent_(event) {
         var e = event || window.event;
         e.preventDefault && e.preventDefault();
         e.stopPropagation && e.stopPropagation();
@@ -25,7 +25,7 @@ window.onload = function(){
         node.ontouchend = absorbEvent_;
         node.ontouchcancel = absorbEvent_;
     }
-    preventLongPressMenu(oBtn);*/
+    preventLongPressMenu(oBtn);
 
     /*触摸事件*/
     oBtn.addEventListener("touchstart",function(){
