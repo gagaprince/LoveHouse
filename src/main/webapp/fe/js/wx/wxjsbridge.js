@@ -80,6 +80,7 @@ var wxBridge = (function(wx,$){
 	//out function 
 	function setTitle(title){
 		shareObj["title"] = title||shareObj["title"];
+        alert(shareObj["title"]);
 	}
 	function setDesc(desc){
 		shareObj["desc"] = desc||shareObj["desc"];
