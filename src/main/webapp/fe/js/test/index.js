@@ -6,6 +6,6 @@ function initPage(){
 }
 function initShare(){
     wxBridge.setImgUrl("http://cgzp.cdn.novorunning.com/second/images/big_icon.jpg");
-    wxBridge.setLink("http://second.shenzhankai.com/second/index.html");
-    wxBridge.setTitle("我按出了10个1秒，一个终极大奖都木有，这个是骗人滴！")
+    wxBridge.setLink("http://gagalulu.wang/lovelulu/game/goSecond");
+    wxBridge.setTitle("超级无敌王子冬，竟然按出了1s，快来试一试！")
 }
