@@ -104,7 +104,7 @@ window.onload = function(){
             var imgUrl = "http://cgzp.cdn.novorunning.com/second/images/big_icon.jpg";
             wxBridge.setImgUrl(imgUrl);
             wxBridge.setTitle(title);
-            wxBridge.setDesc("你能精确地按出一秒吗？");
+            wxBridge.setDesc(title);
             wxBridge.refresh();
         }else{
             alert("先输入文字亲~~~");
