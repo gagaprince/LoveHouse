@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     #share {width: 100%;height: 100%;background: rgba(0,0,0,0.9) url(http://cgzp.cdn.novorunning.com/second/images/second_share.png) no-repeat;background-position: top right; position: absolute;top:0;right: 0;z-index: 99;display: none;}
     #logo {width: 80px;height: 80px;background:url(http://cgzp.cdn.novorunning.com/second/images/Fiilogo.png);background-size: 100% 100%; margin: 10px auto;}
     .label-des{
-        width:200px;
+        width:300px;
         height:30px;
         margin:10px auto;
     }
