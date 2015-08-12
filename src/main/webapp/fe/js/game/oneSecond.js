@@ -74,6 +74,7 @@ window.onload = function(){
         wxBridge.setImgUrl(imgUrl);
         wxBridge.setTitle(title)
         wxBridge.setDesc("你能精确地按出一秒吗？");
+        wxBridge.refresh();
     },false);
 
     var aShare = document.getElementById("share_a");
