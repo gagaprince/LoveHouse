@@ -23,7 +23,17 @@ public class WeiXinConfig {
 	private WXAccessToken wxAccessToken;
 	private WXbasic wxBasic;
 	private String wxShareHost;
+	private String userMsgUrl;
 	
+	
+	public String getUserMsgUrl() {
+		return userMsgUrl;
+	}
+
+	public void setUserMsgUrl(String userMsgUrl) {
+		this.userMsgUrl = userMsgUrl;
+	}
+
 	public String getWxShareHost() {
 		return wxShareHost;
 	}
@@ -43,6 +53,9 @@ public class WeiXinConfig {
 	}
 
 	private String jsapiTicketGetUrl ;
+	private String loginAccessTokenUrl;
+	
+	
 	@Autowired
 	private WeiXinDaoService wxDaoService;
 	@Autowired
@@ -75,11 +88,21 @@ public class WeiXinConfig {
 	
 	private void initData(){
 		jsapiTicketGetUrl = get("jsapi_ticket_url");
+		loginAccessTokenUrl = get("login_access_token");
+		userMsgUrl = get("login_usermsgurl");
 		wxShareHost = get("AppHost");
 		initTicket();
 		initToken();
 	}
 	
+	public String getLoginAccessTokenUrl() {
+		return loginAccessTokenUrl;
+	}
+
+	public void setLoginAccessTokenUrl(String loginAccessTokenUrl) {
+		this.loginAccessTokenUrl = loginAccessTokenUrl;
+	}
+
 	public String getJsapiTicketGetUrl() {
 		return jsapiTicketGetUrl;
 	}

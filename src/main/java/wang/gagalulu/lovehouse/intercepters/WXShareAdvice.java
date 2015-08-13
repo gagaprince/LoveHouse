@@ -16,7 +16,7 @@ import com.alibaba.fastjson.JSON;
 
 @Aspect
 @Component
-public class WXSharAdvice {
+public class WXShareAdvice {
 	@Autowired
 	private WeiXinShareService wxShareService;
 	
