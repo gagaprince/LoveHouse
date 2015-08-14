@@ -27,19 +27,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta charset="UTF-8">
-
+    <style>
+        *{
+            margin:0;
+            padding:0;
+          }
+    </style>
   </head>
   
   <body>
     欢迎光临<c:out value="${name}"></c:out>的s小屋
-    <img id="head" src="">
+    <img id="head" src="" style="width:100%;">
   </body>
   <script type="text/javascript" src="/fe/js/lib/zepto-1.1.4.js"></script>
   <%@include file="wx/wxsharePage.jsp" %>
   <%@include file="wx/wxloginPage.jsp" %>
   <script src="/fe/js/test/index.js"></script>
     <script>
-        alert(WxUserMsg.getHeadUrl());
         $("#head").attr("src",WxUserMsg.getHeadUrl());
     </script>
 </html>
