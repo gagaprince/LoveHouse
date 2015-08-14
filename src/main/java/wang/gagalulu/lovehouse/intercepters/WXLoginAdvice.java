@@ -102,7 +102,7 @@ public class WXLoginAdvice {
 		if(domain == null){
 			domain = wxConfig.get("AppHost");
 		}
-		String nowUrl = request.getRequestURL().toString();
+		String nowUrl = "http://"+domain+request.getRequestURI();
 		String search = request.getQueryString();
 		if(search!=null){
 			nowUrl += "?"+search;
