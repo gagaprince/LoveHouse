@@ -38,7 +38,7 @@ public class WXLoginAdvice {
 	private static final Logger logger =  Logger.getLogger(WXLoginAdvice.class);
 	
 	@Around("wxLoginController()")
-	public void doAround(ProceedingJoinPoint  joinPoint) throws Throwable{
+	public Object doAround(ProceedingJoinPoint  joinPoint) throws Throwable{
 		Object[] args = joinPoint.getArgs();
 		if(args.length>1){
 			Object maybeReq = args[0];
@@ -54,8 +54,7 @@ public class WXLoginAdvice {
 				
 				if(token!=null&&openId!=null){
 					if(setUserMsgIn(token, openId, request)){
-						joinPoint.proceed();
-						return;
+						return joinPoint.proceed();
 					}
 				}
 				
@@ -72,8 +71,7 @@ public class WXLoginAdvice {
 						if(token!=null){//正常返回token
 							openId = setTokenCookie(accessJson,response);
 							if(setUserMsgIn(token, openId, request)){
-								joinPoint.proceed();
-								return;
+								return joinPoint.proceed();
 							}
 						}
 						//code 不正常
@@ -83,8 +81,10 @@ public class WXLoginAdvice {
 				
 				//跳转到指定的url
 				sendRedirect(request,response);
+				return null;
 			}
 		}
+		return joinPoint.proceed();
 	}
 	
 	private void sendRedirect(HttpServletRequest request,HttpServletResponse response){
