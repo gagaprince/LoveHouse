@@ -36,6 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </body>
   <script type="text/javascript" src="/fe/js/lib/zepto-1.1.4.js"></script>
   <%@include file="wx/wxsharePage.jsp" %>
+  <%@include file="wx/wxloginPage.jsp" %>
   <script src="/fe/js/test/index.js"></script>
     <script>
         alert(WxUserMsg.getHeadUrl());
