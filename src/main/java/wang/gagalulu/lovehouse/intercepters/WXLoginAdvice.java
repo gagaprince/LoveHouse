@@ -119,7 +119,7 @@ public class WXLoginAdvice {
 		}
 		String authorizeUrl = wxConfig.getWxLoginAuthorizeUrl();
 		WXbasic wxBasic = wxConfig.getWxBasic();
-		String returnUrl = authorizeUrl+"?appid="+wxBasic.getAppId()+"&redirect_url="+redirectUrl+"&response_type=code&scope=snsapi_base&state="+new Random().nextInt(1000)+"#wechar_redirect";
+		String returnUrl = authorizeUrl+"?appid="+wxBasic.getAppId()+"&redirect_url="+redirectUrl+"&response_type=code&scope=snsapi_userinfo&state="+new Random().nextInt(1000)+"#wechar_redirect";
 		logger.info("authorizeUrl:"+returnUrl);
 		return returnUrl;
 	}
