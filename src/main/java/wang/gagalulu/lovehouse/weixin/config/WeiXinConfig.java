@@ -24,8 +24,18 @@ public class WeiXinConfig {
 	private WXbasic wxBasic;
 	private String wxShareHost;
 	private String userMsgUrl;
+	private String wxLoginAuthorizeUrl;
 	
 	
+	
+	public String getWxLoginAuthorizeUrl() {
+		return wxLoginAuthorizeUrl;
+	}
+
+	public void setWxLoginAuthorizeUrl(String wxLoginAuthorizeUrl) {
+		this.wxLoginAuthorizeUrl = wxLoginAuthorizeUrl;
+	}
+
 	public String getUserMsgUrl() {
 		return userMsgUrl;
 	}
@@ -90,6 +100,7 @@ public class WeiXinConfig {
 		jsapiTicketGetUrl = get("jsapi_ticket_url");
 		loginAccessTokenUrl = get("login_access_token");
 		userMsgUrl = get("login_usermsgurl");
+		wxLoginAuthorizeUrl = get("login_redirect_url");
 		wxShareHost = get("AppHost");
 		initTicket();
 		initToken();
