@@ -1,7 +1,6 @@
 @charset "utf-8";
 /* CSS reset */
-body{background-color:#ebf7f9;}
-.interCar_container{background-color:#ebf7f9;}
+body{}
 /* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体background:#fff; */
 html{color:#000;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;}
 /* 内外边距通常让各个浏览器样式的表现位置不同 */
@@ -216,3 +215,130 @@ a:active {star:expression(this.onFocus=this.blur());}
 .border-black{border:1px solid #000000;}
 .border-yellow{border:1px solid #ff9900;}
 .border-gray{border:1px solid #ccc;}
+
+
+.h-c{
+    display:-webkit-box;
+    display:-moz-box;
+    display:box;
+    box-orient: horizontal;
+    -webkit-box-orient:horizontal;
+    -moz-box-orient:horizontal;
+    -o-box-orient:horizontal;
+    box-pack:center;
+    -webkit-box-pack:center;
+    -moz-box-pack:center;
+    -o-box-pack:center;
+    box-align:center;
+    -webkit-box-align:center;
+    -moz-box-align:center;
+    -o-box-align:center;
+}
+
+.h-l{
+    display:-webkit-box;
+    display:-moz-box;
+    display:box;
+    box-orient: horizontal;
+    -webkit-box-orient:horizontal;
+    -moz-box-orient:horizontal;
+    -o-box-orient:horizontal;
+    box-pack:start;
+    -webkit-box-pack:start;
+    -moz-box-pack:start;
+    -o-box-pack:start;
+    box-align:center;
+    -webkit-box-align:center;
+    -moz-box-align:center;
+    -o-box-align:center;
+}
+
+.h-r{
+    display:-webkit-box;
+    display:-moz-box;
+    display:box;
+    box-orient: horizontal;
+    -webkit-box-orient:horizontal;
+    -moz-box-orient:horizontal;
+    -o-box-orient:horizontal;
+    box-pack:end;
+    -webkit-box-pack:end;
+    -moz-box-pack:end;
+    -o-box-pack:end;
+    box-align:center;
+    -webkit-box-align:center;
+    -moz-box-align:center;
+    -o-box-align:center;
+}
+
+.v-c{
+    display:-webkit-box;
+    display:-moz-box;
+    display:box;
+    box-orient: vertical;
+    -webkit-box-orient:vertical;
+    -moz-box-orient:vertical;
+    -o-box-orient:vertical;
+    box-pack:center;
+    -webkit-box-pack:center;
+    -moz-box-pack:center;
+    -o-box-pack:center;
+    box-align:center;
+    -webkit-box-align:center;
+    -moz-box-align:center;
+    -o-box-align:center;
+}
+
+.v-u{
+    display:-webkit-box;
+    display:-moz-box;
+    display:box;
+    box-orient: vertical;
+    -webkit-box-orient:vertical;
+    -moz-box-orient:vertical;
+    -o-box-orient:vertical;
+    box-pack:start;
+    -webkit-box-pack:start;
+    -moz-box-pack:start;
+    -o-box-pack:start;
+    box-align:center;
+    -webkit-box-align:center;
+    -moz-box-align:center;
+    -o-box-align:center;
+}
+
+.v-d{
+    display:-webkit-box;
+    display:-moz-box;
+    display:box;
+    box-orient: vertical;
+    -webkit-box-orient:vertical;
+    -moz-box-orient:vertical;
+    -o-box-orient:vertical;
+    box-pack:start;
+    -webkit-box-pack:end;
+    -moz-box-pack:end;
+    -o-box-pack:end;
+    box-align:center;
+    -webkit-box-align:center;
+    -moz-box-align:center;
+    -o-box-align:center;
+}
+
+.v-l{
+    display:-webkit-box;
+    display:-moz-box;
+    display:box;
+    box-orient: vertical;
+    -webkit-box-orient:vertical;
+    -moz-box-orient:vertical;
+    -o-box-orient:vertical;
+    box-pack:center;
+    -webkit-box-pack:center;
+    -moz-box-pack:center;
+    -o-box-pack:center;
+    box-align:start;
+    -webkit-box-align:start;
+    -moz-box-align:start;
+    -o-box-align:start;
+}

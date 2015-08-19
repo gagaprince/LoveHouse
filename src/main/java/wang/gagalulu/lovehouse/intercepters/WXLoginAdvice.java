@@ -37,6 +37,11 @@ public class WXLoginAdvice {
 	
 	private static final Logger logger =  Logger.getLogger(WXLoginAdvice.class);
 	
+	
+	private final String WX_LOGIN_TOKEN = "lovelulu_wx_token";
+	private final String WX_LOGIN_RE_TOKEN = "lovelulu_wx_reToken";
+	private final String WX_LOGIN_OPENID = "lovelulu_wx_openid";
+	
 	@Around("wxLoginController()")
 	public Object doAround(ProceedingJoinPoint  joinPoint) throws Throwable{
 		Object[] args = joinPoint.getArgs();
@@ -47,8 +52,8 @@ public class WXLoginAdvice {
 				HttpServletRequest request = (HttpServletRequest)maybeReq;
 				HttpServletResponse response = (HttpServletResponse)maybeRes;
 				
-				String token = cookieUtil.getCookie(request,"lovelulu_wx_token");
-				String openId = cookieUtil.getCookie(request, "lovelulu_wx_openid");
+				String token = cookieUtil.getCookie(request,WX_LOGIN_TOKEN);
+				String openId = cookieUtil.getCookie(request, WX_LOGIN_OPENID);
 				
 				//有token逻辑
 				
@@ -59,6 +64,16 @@ public class WXLoginAdvice {
 				}
 				
 				//token 失效 或者没有
+				
+				String refreshToken = cookieUtil.getCookie(request, WX_LOGIN_RE_TOKEN);
+				
+				//有refreshToken
+				
+				if(refreshToken!=null&&openId!=null){
+					
+				}
+				
+				//refreshToken 没有 或者 失效
 				
 				String code = request.getParameter("code");
 				
@@ -130,9 +145,9 @@ public class WXLoginAdvice {
 		int time = accessJson.getIntValue("expires_in");
 		String refreshToken = accessJson.getString("refresh_token");
 		String openid = accessJson.getString("openid");
-		cookieUtil.addCookie(response, "lovelulu_wx_token", accessToken, "/",time);
-		cookieUtil.addCookie(response, "lovelulu_wx_reToken", refreshToken, "/");
-		cookieUtil.addCookie(response, "lovelulu_wx_openid", openid, "/");
+		cookieUtil.addCookie(response, WX_LOGIN_TOKEN, accessToken, "/",time);
+		cookieUtil.addCookie(response, WX_LOGIN_RE_TOKEN, refreshToken, "/");
+		cookieUtil.addCookie(response, WX_LOGIN_OPENID, openid, "/");
 		return openid;
 	}
 	
