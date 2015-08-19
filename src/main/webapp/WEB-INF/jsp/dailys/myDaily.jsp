@@ -35,7 +35,7 @@
     <body>
         <div class="daily-frame v-c">
             <div class="daily-title font-yahei">
-                我的标题，限制在18个字，几个字了，带标点
+                那个我深爱的姑娘
             </div>
             <div class="daily-time-frame">
                 <div class="daily-time">2015-08-19</div>
@@ -47,10 +47,17 @@
                 <div class="daily-content">
                     <div class="daily-bg v-c">
                         <div class="daily-duan-frame black-tou">
-                            这里是第一段，巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉
+                            她很纯真，她很美腻，她很聪明，她很专一，她很霸道，她很文艺，她很厉害，她很神秘，她很孝顺，她很贤惠，她很温柔，也很逗逼，她~是我的唯一！<br>她有数不尽的优点，<br>也有改不掉的强迫症。<br>我们的故事很长很复杂，<br>其实也很短很简单，<br>只是我喜欢她，<br>刚好她也喜欢我，
+                            <br>这不就是传说中的幸福嘛！
+                        </div>
+                        <div class="daily-img mt30">
+                            <img src="http://gagaprince.oss-cn-beijing.aliyuncs.com/daily/20150819223328.jpg">
                         </div>
                         <div class="daily-duan-frame white-tou mt30">
                             这里是第一段，巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉
+                        </div>
+                        <div class="daily-duan-frame">
+                            你的朋友圈总会有一些很奇怪又很有趣的东西蹦出来，时而搞怪，时而煽情，时而卖萌，时而文艺气息朦胧，
                         </div>
                         <div class="daily-line mt30"></div>
                         <div class="daily-img mt30">
@@ -59,10 +66,10 @@
                         <div class="daily-duan-frame">
                             这里是第一段，巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉
                         </div>
-
                         <div class="daily-duan-frame">
                             这里是第一段，巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉
                         </div>
+
                         <div class="daily-duan-frame">
                             这里是第一段，巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉
                         </div>
