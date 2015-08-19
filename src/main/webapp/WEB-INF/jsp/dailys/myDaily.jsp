@@ -103,23 +103,24 @@
                             <br>什么时候变成爱的？<br>从那么一天，我不再觉得她高不可攀开始，<br>从那么一天，看到她难过我很心塞开始，<br>从那么一天，她坐别人的车回家，我难过了一晚上开始，<br>从那么一天，
                             她住院了而我却不在她身边开始！
                         </div>
-                    <div class="daily-img mt30">
-                        <img src="http://gagaprince.oss-cn-beijing.aliyuncs.com/daily/20150819223452.jpg">
-                    </div>
+                        <div class="daily-img mt30">
+                            <img src="http://gagaprince.oss-cn-beijing.aliyuncs.com/daily/IMG_0517.JPG">
+                        </div>
                         <div class="daily-duan-frame">
                             亲爱的，这是我们第一个情人节，我依然不能飞到你身边呵护你，照顾你~不能帮你揉一揉被针扎过的伤痕累累的手，不能将温好的药拿到你身旁，不能亲手为你做爱心便当，
-                            不能帮你拿着吊瓶陪你上厕所。
+                            不能帮你拿着吊瓶陪你上厕所。<br>
                             亲爱的，我能想到最浪漫的事，每天早晨一睁开眼就看到你，每一顿饭都有你陪伴，在你身后聚精会神的看你打穿越火线，稍微发出点动静，就会被你狠揍一通~教你玩比较费脑子的三国杀
-                            我们一起去开黑吧。拿着单反，拉着你到每一个我没去过地方拍照片，把你最美的样子记录下来。还有最好能穿上中学生的校服，陪我补个初恋！
+                            我们一起去开黑吧。拿着单反，拉着你到每一个我没去过地方拍照片，把你最美的样子记录下来。还有最好能穿上中学生的校服，陪我补个初恋！<br>
                             亲爱的，不久的将来，我要让你坐在小路虎里面笑，你笑起来的样子最美了~我们要有大大的房子，房子里要有你，那样才是我们的家~我要和你一起孝敬奶奶，你要和我一起孝敬爸爸妈妈，我们要有可爱的孩子，
-                            我教他数学，你教她英语！
+                            我教他数学，你教她英语！<br>
+                            亲爱的，我爱你，我爱你，我爱你！
+                        </div>
+                        <div class="daily-img mt30">
+                            <img src="http://gagaprince.oss-cn-beijing.aliyuncs.com/daily/IMG_1259.JPG">
                         </div>
 
                         <div class="daily-duan-frame" style="font-size:18px;">
                             愿得你心，白首不离~
-                        </div>
-                        <div class="daily-img mt30">
-                            <img src="http://gagaprince.oss-cn-beijing.aliyuncs.com/daily/IMG_1259.JPG">
                         </div>
                    </div>
                 </div>
