@@ -34,7 +34,7 @@ public class DailyService {
 		List<DailyBean> dailyBeanList = new ArrayList<DailyBean>();
 		
 		JSONObject dailyContentJson = JSONObject.parseObject(dailyContent);
-		String headTitle = dailyContentJson.getString("headTile");
+		String headTitle = dailyContentJson.getString("headTitle");
 		String title = dailyContentJson.getString("title");
 		String time = dailyContentJson.getString("time");
 		String shareTitle = dailyContentJson.getString("shareTitle");

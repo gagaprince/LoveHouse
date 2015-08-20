@@ -10,7 +10,7 @@
     <head>
         <base href="<%=basePath%>">
 
-        <title><c:out value="${contextBean.headTitle}"></c:out></title>
+        <title>${contextBean.headTitle}</title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport">
