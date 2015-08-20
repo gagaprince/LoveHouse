@@ -73,6 +73,11 @@
             </div>
         </div>
     </body>
+    <script type="text/javascript">
+    	    var shareImg = "${contextBean.shareImg}";
+		    var shareTitle = "${contextBean.shareTitle}";
+		    var shareDesc = "${contextBean.shareDesc}";
+    </script>
     <script type="text/javascript" src="/fe/js/lib/zepto-1.1.4.js"></script>
     <%@include file="../wx/wxsharePage.jsp" %>
     <script src="/fe/js/daily/index.js"></script>
