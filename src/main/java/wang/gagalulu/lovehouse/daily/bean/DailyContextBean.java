@@ -6,6 +6,9 @@ public class DailyContextBean {
 	private String title;
 	private String headTitle;
 	private String time;
+	private String shareTitle;
+	private String shareDesc;
+	private String shareImg;
 	private List<DailyBean> dailyList;
 	public String getTitle() {
 		return title;
@@ -30,6 +33,24 @@ public class DailyContextBean {
 	}
 	public void setDailyList(List<DailyBean> dailyList) {
 		this.dailyList = dailyList;
+	}
+	public String getShareTitle() {
+		return shareTitle;
+	}
+	public void setShareTitle(String shareTitle) {
+		this.shareTitle = shareTitle;
+	}
+	public String getShareDesc() {
+		return shareDesc;
+	}
+	public void setShareDesc(String shareDesc) {
+		this.shareDesc = shareDesc;
+	}
+	public String getShareImg() {
+		return shareImg;
+	}
+	public void setShareImg(String shareImg) {
+		this.shareImg = shareImg;
 	}
 	
 	

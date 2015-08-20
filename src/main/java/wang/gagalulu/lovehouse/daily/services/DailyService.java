@@ -31,13 +31,15 @@ public class DailyService {
 	
 	public DailyContextBean iWantParseDailyModel(DailyModel dailyModel){
 		String dailyContent = dailyModel.getContent();
-		logger.info(dailyContent);
 		List<DailyBean> dailyBeanList = new ArrayList<DailyBean>();
 		
 		JSONObject dailyContentJson = JSONObject.parseObject(dailyContent);
 		String headTitle = dailyContentJson.getString("headTile");
 		String title = dailyContentJson.getString("title");
 		String time = dailyContentJson.getString("time");
+		String shareTitle = dailyContentJson.getString("shareTitle");
+		String shareDesc = dailyContentJson.getString("shareDesc");
+		String shareImg = dailyContentJson.getString("shareImg");
 		JSONArray dailyContents = dailyContentJson.getJSONArray("content");
 		int length = dailyContents.size();
 		for(int i=0;i<length;i++){
@@ -52,6 +54,9 @@ public class DailyService {
 		contextBean.setHeadTitle(headTitle);
 		contextBean.setTime(time);
 		contextBean.setDailyList(dailyBeanList);	
+		contextBean.setShareTitle(shareTitle);
+		contextBean.setShareDesc(shareDesc);
+		contextBean.setShareImg(shareImg);
 		return contextBean;
 	}
 }
