@@ -9,6 +9,7 @@ public class DailyContextBean {
 	private String shareTitle;
 	private String shareDesc;
 	private String shareImg;
+	private String linkId;
 	private List<DailyBean> dailyList;
 	public String getTitle() {
 		return title;
@@ -51,6 +52,12 @@ public class DailyContextBean {
 	}
 	public void setShareImg(String shareImg) {
 		this.shareImg = shareImg;
+	}
+	public String getLinkId() {
+		return linkId;
+	}
+	public void setLinkId(String linkId) {
+		this.linkId = linkId;
 	}
 	
 	

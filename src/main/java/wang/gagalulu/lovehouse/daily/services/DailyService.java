@@ -40,6 +40,7 @@ public class DailyService {
 		String shareTitle = dailyContentJson.getString("shareTitle");
 		String shareDesc = dailyContentJson.getString("shareDesc");
 		String shareImg = dailyContentJson.getString("shareImg");
+		String linkId = dailyContentJson.getString("linkId");
 		JSONArray dailyContents = dailyContentJson.getJSONArray("content");
 		int length = dailyContents.size();
 		for(int i=0;i<length;i++){
@@ -57,6 +58,7 @@ public class DailyService {
 		contextBean.setShareTitle(shareTitle);
 		contextBean.setShareDesc(shareDesc);
 		contextBean.setShareImg(shareImg);
+		contextBean.setLinkId(linkId);
 		return contextBean;
 	}
 }
