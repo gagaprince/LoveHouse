@@ -38,7 +38,7 @@
                 ${contextBean.title}
             </div>
             <div class="daily-time-frame h-l">
-                <div class="daily-time">${contextBean.time}</div><a href="lovelulu/daily/index?dailyId=${contextBean.linkId}"><div class="daily-more">点我得到更多哦</div></a>
+                <div class="daily-time">${contextBean.time}</div><a href="http://gagalulu.wang/lovelulu/daily/index?dailyId=${contextBean.linkId}"><div class="daily-more">点我得到更多哦</div></a>
             </div>
             <div class="daily-img-frame h-c">
                 <img src="http://gagaprince.oss-cn-beijing.aliyuncs.com/daily/0.jpg">
