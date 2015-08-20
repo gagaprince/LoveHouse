@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import com.alibaba.fastjson.JSONObject;
 
 @Service
 public class DailyService {
+	private static final Logger logger =  Logger.getLogger(DailyService.class);
 	@Autowired
 	private DailyDao dailyDao;
 	
@@ -29,7 +31,7 @@ public class DailyService {
 	
 	public DailyContextBean iWantParseDailyModel(DailyModel dailyModel){
 		String dailyContent = dailyModel.getContent();
-		
+		logger.info(dailyContent);
 		List<DailyBean> dailyBeanList = new ArrayList<DailyBean>();
 		
 		JSONObject dailyContentJson = JSONObject.parseObject(dailyContent);

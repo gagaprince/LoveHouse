@@ -5,7 +5,7 @@
 <mapper namespace="wang.gagalulu.lovehouse.dao.DailyDao">
 	<resultMap id="DailyModelResultMap" type="DailyModel">
 		<id column="id" property="id" jdbcType="BIGINT" />
-		<result column="content" property="content" jdbcType="LONGTEXT" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="DATE" />
 	</resultMap>
 	
