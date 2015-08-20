@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wang.gagalulu.lovehouse.dao.DailyDao">
+	<resultMap id="DailyModelResultMap" type="DailyModel">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="content" property="content" jdbcType="LONGTEXT" />
+		<result column="create_time" property="createTime" jdbcType="DATE" />
+	</resultMap>
+	
+	<insert id="save"
+		parameterType="DailyModel"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into daily(
+		<trim suffixOverrides=",">
+			<if test="id != null"> id ,</if>
+			<if test="content != null"> content ,</if>
+			<if test="createTime != null"> create_time ,</if>
+		</trim>
+		)values(
+		<trim suffixOverrides=",">
+			<if test="id != null"> #{id} ,</if>
+			<if test="content != null"> #{content} ,</if>
+			<if test="createTime != null"> #{createTime} ,</if>
+		</trim>
+		)
+	</insert>
+	
+	<select id="getDailyById" parameterType="map"  resultMap="DailyModelResultMap">
+		select * from daily s
+		<where>
+				1 = 1
+			<if test="id != null">
+				and s.id = #{id}
+			</if>		
+		</where>  
+	</select>
+</mapper>
