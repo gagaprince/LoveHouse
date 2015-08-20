@@ -48,16 +48,16 @@
                     <div class="daily-bg v-c">
                         <c:forEach var="dailyItem" items="${contextBean.dailyList}" varStatus="status">
                             <c:if test="${dailyItem.type=='content'}">
-                                <c:if test="${status.index==0}">
+                                <!--<c:if test="${status.index==0}">
                                     <div class="daily-duan-frame black-tou">
                                         ${dailyItem.content}
                                     </div>
                                 </c:if>
-                                <c:if test="${status.index!=0}">
+                                <c:if test="${status.index!=0}">-->
                                     <div class="daily-duan-frame">
                                         ${dailyItem.content}
                                     </div>
-                                </c:if>
+                                <!--</c:if>-->
                             </c:if>
                             <c:if test="${dailyItem.type=='img'}">
                                 <div class="daily-img mt30">
