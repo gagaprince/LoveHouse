@@ -25,6 +25,8 @@ public class WeiXinService {
 	private WeiXinConfig wxConfig;
 	@Autowired
 	private WeiXinErrorService wxErrorService;
+	@Autowired
+	private HttpUtil httpUtil;
 	
 	private static final Logger logger =  Logger.getLogger(WeiXinService.class);
 	/**
@@ -47,7 +49,7 @@ public class WeiXinService {
 	 */
 	private void getWeiXinAccessToken(WXAccessToken wxAccessToken){
 		String url = getWeixinAccessTokenUrl(wxAccessToken);
-		String result = HttpUtil.getContentByUrl(url);
+		String result = httpUtil.getContentByUrl(url);
 		logger.info("get weixin accessToken:"+result);
 		JSONObject accessJson = JSONObject.parseObject(result);
 		String accessToken = (String)accessJson.get("access_token");
@@ -63,18 +65,18 @@ public class WeiXinService {
 	//获取jsapiticket 通过http
 	private String getJsapiTicketFromHttp(WXAccessToken wxAccessToken){
 		String url = getWeixinJsTecketUrl(wxAccessToken);
-		String result = HttpUtil.getContentByUrl(url);
+		String result = httpUtil.getContentByUrl(url);
 		logger.info("get weixin jsapiticket :" +result);
 		JSONObject ticket = JSONObject.parseObject(result);
 		String ticketStr = ticket.getString("ticket");
 		if(ticketStr==null){
+			logger.error((String)ticket.get("errmsg"));
 			ticketStr = (String)wxErrorService.filter(ticket.getIntValue("errcode"),new ErrorCallBack() {
 				@Override
 				public Object onErrorFinish() {
 					return iNeedTicket();
 				}
 			});
-			logger.error((String)ticket.get("errmsg"));
 		}else{
 			wxConfig.setJsapiTicket(ticketStr);
 		}
@@ -129,7 +131,7 @@ public class WeiXinService {
 	
 	private void getWeiXinIps(WXIps wxIps){
 		String url = getWeixinIpsUrl(wxIps);
-		String result = HttpUtil.getContentByUrl(url);
+		String result = httpUtil.getContentByUrl(url);
 		logger.info("get weixin ips:"+result);
 		JSONObject ipsJson = JSONObject.parseObject(result);
 		JSONArray ipsArray = ipsJson.getJSONArray("ip_list");

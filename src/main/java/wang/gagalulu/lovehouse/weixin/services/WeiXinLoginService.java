@@ -12,11 +12,14 @@ import wang.gagalulu.lovehouse.weixin.config.WeiXinConfig;
 public class WeiXinLoginService {
 	private static final Logger logger =  Logger.getLogger(WeiXinLoginService.class);
 	@Autowired
+	private HttpUtil httpUtil;
+	
+	@Autowired
 	private WeiXinConfig wxConfig;
 	public String iWantLoginToken(String code){
 		String loginMsgUrl = giveMeLoginUrl(code);
 		logger.info("请求logintoken的url："+loginMsgUrl);
-		String result = HttpUtil.getContentByUrl(loginMsgUrl);
+		String result = httpUtil.getContentByUrl(loginMsgUrl);
 		logger.info("获得logintoken的content："+result);
 		return result;
 	}
@@ -25,7 +28,7 @@ public class WeiXinLoginService {
 	public String iWantUserMsg(String token,String openId){
 		String userMsgUrl = giveMeUserMsgUrl(token,openId);
 		logger.info("请求用户信息的的url："+userMsgUrl);
-		String result = HttpUtil.getContentByUrl(userMsgUrl);
+		String result = httpUtil.getContentByUrl(userMsgUrl);
 		logger.info("获得用户信息的content："+result);
 		return result;
 	}
