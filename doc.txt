@@ -1,0 +1,10 @@
+http://gagalulu.wang/lovelulu/wxMenu/create
+修改菜单
+/lovelulu/wx/getToken
+获取token
+/lovelulu/wx/getTicket
+获取ticket
+http://gagalulu.wang/lovelulu/game/oneSecond
+游戏一秒
+http://gagalulu.wang/lovelulu/daily/index?dailyId=521
+日志
