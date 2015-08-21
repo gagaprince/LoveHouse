@@ -14,7 +14,7 @@
     font-size: 16px;
 }
 .daily-time{
-    margin-left: 24px;
+    margin-left: 4%;
 }
 .daily-more{
     margin-left: 12px;
@@ -49,6 +49,7 @@
     background-repeat: repeat repeat;
 }
 .daily-duan-frame{
+    text-indent:2em;
     font-size: 16px;
     width:90%;
     box-sizing: border-box;
