@@ -1,6 +1,7 @@
 package wang.gagalulu.lovehouse.daily.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -60,5 +61,20 @@ public class DailyService {
 		contextBean.setShareImg(shareImg);
 		contextBean.setLinkId(linkId);
 		return contextBean;
+	}
+	
+	public DailyModel saveOrUpdateDaily(DailyModel model) throws Exception{
+		Long id = model.getId();
+		if(id!=null){
+			dailyDao.update(model);
+		}else{
+			model.setCreateTime(new Date());
+			dailyDao.save(model);
+		}
+		return model;
+	}
+	
+	public void deleteDaily(DailyModel model) throws Exception{
+		dailyDao.delete(model);
 	}
 }

@@ -6,5 +6,7 @@ import wang.gagalulu.lovehouse.bean.pojo.DailyModel;
 
 public interface DailyDao {
 	public DailyModel getDailyById(Map<String,Object> params);
-	public int save(DailyModel model)throws Exception;
+	public long save(DailyModel model)throws Exception;
+	public void update(DailyModel model)throws Exception;
+	public void delete(DailyModel model)throws Exception;
 }

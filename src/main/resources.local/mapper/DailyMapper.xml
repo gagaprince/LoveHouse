@@ -27,6 +27,22 @@
 		)
 	</insert>
 	
+	<update id="update" parameterType="DailyModel">
+		update  daily 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="content != null"> content = #{content} ,</if>
+			<if test="createTime != null"> create_time = #{createTime} ,</if>
+		</trim>
+		where id = #{id}
+	</update>
+	<delete id="delete" parameterType="DailyModel">
+		delete from daily 
+		where 1=0
+		<if test="id != null">
+			or id = #{id}
+		</if>
+	</delete>
+	
 	<select id="getDailyById" parameterType="map"  resultMap="DailyModelResultMap">
 		select * from daily s
 		<where>
