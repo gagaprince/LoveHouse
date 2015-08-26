@@ -1,0 +1,59 @@
+@import "../base/base.css";
+body{
+	background:#ab3289;
+}
+.content{
+	width:750px;
+	margin: auto;
+	min-height:600px;
+	background:white;
+}
+.content h1{
+	font-size:36px;
+	margin: auto;
+}
+.content .frame-item{
+	width:550px;
+	margin: auto;
+	border: 1px solid #666;
+}
+.content .frame-item .frame-item-title{
+	width:90px;
+	height:50px;
+	padding:0 0 0 10px;
+}
+.content .frame-item .frame-item-value{
+	width:438px;
+	min-height: 50px;
+	padding:0 0 0 10px;
+	border-left:1px solid #666;
+}
+.content .frame-item .value-input{
+	width:100%;
+	height:50px;
+	border:none;
+}
+.main-item{
+	width:100%;
+	border:1px solid #666;
+	padding-left:10px;
+}
+.main-item .radioFrame{
+	margin-left:5px;
+	width:50px;
+}
+.main-item .radioFrame input{
+	margin-left:5px;
+	display: block;
+}
+.main-item .delete{
+	color:blue;
+	cursor: pointer;
+}
+.button-frame{
+	width:100%;
+	height:50px;
+}
+.save-button{
+	display:block;
+}
