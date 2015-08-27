@@ -65,6 +65,7 @@ public class DailyService {
 	
 	public DailyModel saveOrUpdateDaily(DailyModel model) throws Exception{
 		Long id = model.getId();
+		model.setContent(replaceWhiteSpace(model.getContent()));
 		if(id!=null){
 			dailyDao.update(model);
 		}else{
@@ -72,6 +73,10 @@ public class DailyService {
 			dailyDao.save(model);
 		}
 		return model;
+	}
+	
+	private String replaceWhiteSpace(String dailyContent){
+		return dailyContent.replace("  ", "<br>");
 	}
 	
 	public void deleteDaily(DailyModel model) throws Exception{
