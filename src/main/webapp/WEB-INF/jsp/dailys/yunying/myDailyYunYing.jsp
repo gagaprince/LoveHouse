@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE>
 <html>
     <head>
 
@@ -73,8 +73,9 @@
 	        				<div>图片</div>
 	        				<input id="picRadioold" type="radio" name="contentTypeold">	
 	        			</label>
-	        			<input type="textarea" placeholder="请输入" class="value-input" style="width:288px;">
+	        			<input type="textarea" placeholder="请输入" class="value-input" style="width:270px;">
 	        			<div class="delete">删除</div>
+	        			<div class="moveup">上移</div>
 	        		</div>
 	        	</div>
 	        </div>

@@ -13,8 +13,9 @@ function tplMainItem(time){
 							'<div>图片</div>'+
 							'<input id="picRadio'+time+'" type="radio" name="contentType'+time+'">	'+
 						'</label>'+
-						'<input type="textarea" placeholder="请输入" class="value-input" style="width:288px;">'+
+						'<input type="textarea" placeholder="请输入" class="value-input" style="width:270px;">'+
 						'<div class="delete">删除</div>'+
+						'<div class="moveup">上移</div>'+
 					'</div>';
 	return mainItemTpl;
 }
@@ -156,6 +157,19 @@ function initListener(){
 		var length = $("#contentValues").find(".delete").length;
 		if(length>1){
 			$(this).parent().remove();
+		}
+	});
+	$("#contentValues").on("click",".moveup",function(){
+		var length = $("#contentValues").find(".moveup").length;
+		if(length>1){
+			var currentItem = $(this).parent();
+			if(currentItem.prev('.main-item').html()!=undefined){
+				var obj = currentItem.clone(true); 
+				currentItem.prev('.main-item').before(obj);
+				currentItem.remove();
+			}else{
+				alert("已经是最上面了");
+			}
 		}
 	});
 	$("#saveButton").click(function(){

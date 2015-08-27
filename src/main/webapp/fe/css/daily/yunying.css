@@ -46,7 +46,7 @@ body{
 	margin-left:5px;
 	display: block;
 }
-.main-item .delete{
+.main-item .delete,.main-item .moveup{
 	color:blue;
 	cursor: pointer;
 }
