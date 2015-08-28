@@ -1,5 +1,7 @@
 package wang.gagalulu.lovehouse.daily.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -34,6 +36,20 @@ public class DailyYunYingController {
 		return "/dailys/yunying/myDailyYunYing";
 	}
 	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(HttpServletRequest request,Integer pno,Integer psize,Model model){
+		if(pno==null)pno=0;
+		if(psize==null)psize=10;
+		List<DailyModel> dailyList = dailyService.getDailyByPnoSize(pno, psize);
+		int count = dailyService.getDailyCount();
+		int page = (count-1)/psize+1;
+		model.addAttribute("dailyList", dailyList);
+		model.addAttribute("indexBegin", pno*psize);
+		model.addAttribute("dailyCount", count);
+		model.addAttribute("allPage", page);
+		return "/dailys/yunying/myDailylist";
+	}
+	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
 	public String saveMsg(HttpServletRequest request,DailyModel daily){
@@ -62,4 +78,6 @@ public class DailyYunYingController {
 		}
 		return JSON.toJSONString(model);
 	}
+	
+	
 }

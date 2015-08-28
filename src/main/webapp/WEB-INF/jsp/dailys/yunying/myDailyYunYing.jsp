@@ -85,8 +85,8 @@
 	        		<button id="saveButton" class="save-button">保存</button>
 	        	</div>
 	        </div>
-	        
         </div>
+        <div class="qrimg"><img src=""></div>
     </body>
     <script>
     	<c:if test="${!empty dailyModel}">

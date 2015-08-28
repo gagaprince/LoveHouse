@@ -57,3 +57,28 @@ body{
 .save-button{
 	display:block;
 }
+.qrimg{
+	position:fixed;
+	top:50px;
+	right:10px;
+}
+.pagelist{
+	width:100%;
+	height: 50px;
+}
+.pagelist .current{
+	color:white;
+	background:rgb(36,172,22);
+}
+.pageitem{
+	padding:5px 8px;
+	margin:0 5px;
+	background:white;
+	border:1px solid #999;
+	color:rgb(36,172,22);
+	cursor: pointer;
+}
+.pagelist a:hover{
+	background:rgb(238,236,239);
+	color:rgb(36,172,22);
+}

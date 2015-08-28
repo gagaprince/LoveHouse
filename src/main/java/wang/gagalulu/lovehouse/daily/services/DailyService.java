@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,19 @@ public class DailyService {
 			dailyDao.save(model);
 		}
 		return model;
+	}
+	
+	public List<DailyModel> getDailyByPnoSize(int pno,int size){
+		int fromIndex = pno*size;
+		int toIndex = fromIndex+size;
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("fromIndex", fromIndex);
+		params.put("toIndex", toIndex);
+		return dailyDao.getDailyList(params);
+	}
+	
+	public int getDailyCount(){
+		return dailyDao.getAllCount();
 	}
 	
 	private String replaceWhiteSpace(String dailyContent){

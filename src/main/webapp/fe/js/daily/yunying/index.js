@@ -30,6 +30,14 @@ var contextObj=(typeof DailyContent =="undefined")?{
 	"linkId":"521"
 }:DailyContent;
 var contextId=(typeof DailyId =="undefined")?null:DailyId;
+refreshQr();
+function refreshQr(){
+	if(contextId){
+		$(".qrimg").find("img").attr("src","/lovelulu/qr/create?qrStr="+encodeURIComponent("http://gagalulu.wang/lovelulu/daily/index?dailyId="+contextId));
+	}else{
+		$(".qrimg").find("img").attr("src","/lovelulu/qr/create?qrStr=kong");
+	}
+}
 
 function refreshByData(){
 	initNormalMsg();
