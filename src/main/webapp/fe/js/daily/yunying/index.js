@@ -120,6 +120,7 @@ function giveMeContentData(){
 function fetch(){
 	var fetchData = {};
 	fetchData["content"]=JSON.stringify(contextObj);
+	fetchData["title"]=contextObj.title||"无名";
 	if(contextId){
 		fetchData["id"]=contextId;	
 	}

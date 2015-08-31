@@ -6,6 +6,7 @@
 	<resultMap id="DailyModelResultMap" type="DailyModel">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="DATE" />
 	</resultMap>
 	
@@ -16,12 +17,14 @@
 		<trim suffixOverrides=",">
 			<if test="id != null"> id ,</if>
 			<if test="content != null"> content ,</if>
+			<if test="title != null"> title ,</if>
 			<if test="createTime != null"> create_time ,</if>
 		</trim>
 		)values(
 		<trim suffixOverrides=",">
 			<if test="id != null"> #{id} ,</if>
 			<if test="content != null"> #{content} ,</if>
+			<if test="title != null"> #{title} ,</if>
 			<if test="createTime != null"> #{createTime} ,</if>
 		</trim>
 		)
@@ -52,4 +55,18 @@
 			</if>		
 		</where>  
 	</select>
+	
+	<select id="getDailyList" parameterType="map"  resultMap="DailyModelResultMap">
+		select id,title from daily s
+		order by id desc
+		<if test="fromIndex != null and toIndex != null">
+			limit #{fromIndex}, #{toIndex}
+		</if>
+	</select>
+	
+	<select id="getAllCount" resultType="Integer">
+		select count(*) from daily
+		 
+	</select>
+	
 </mapper>

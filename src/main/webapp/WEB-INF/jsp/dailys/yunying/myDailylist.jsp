@@ -22,62 +22,36 @@
 	        <c:forEach var="dailyItem" items="${dailyList}" varStatus="status">
 	        	<div class="frame-item h-l">
 		        	<div class="frame-item-title h-l">${status.index+1}</div>
-		        	<div class="frame-item-value h-l">
-		        		<a href="/lovelulu/daily/yunying?dailyId=${dailyItem.id}">
+		        	<div class="frame-item-value h-l" style="position:relative;">
+		        		<a href="/lovelulu/daily/yunying?dailyId=${dailyItem.id}" target="_blank">
 		        			${dailyItem.title}
 		        		</a>
+		        		<a class="pageitem deletebtn" data-delid="${dailyItem.id}"  style="right:0;position:absolute;top:25%;">删除</a>
 		        	</div>
 		        </div>
 	        </c:forEach>
 	        
-	        <c:if test="${allPage<=6}">
-	        	<div class="pagelist h-c">
-	        		<a class="pageitem">上一页</a>
-	        	<c:forEach var="i" begin="1" end="${allPage}" step="1"> 
-			      	<a class="pageitem">${pno+i}</a>
-		    	</c:forEach>
-			    	<a class="pageitem">下一页</a>
-		        </div>
-	        </c:if>
+	        <c:set var="listpageUri" value="/lovelulu/daily/list?psize=10&pno="></c:set>
 	        
-	        
-	        	
-	        	
-	        	
-	        	
+	        <%@include file="../../utils/listPage.jsp" %>
+	        <a class="pageitem" href="/lovelulu/daily/yunying" target="_blank" style="float:right;margin:0 15% 0 0;">新增</a>
         </div>  
     </body>
     <script type="text/javascript" src="/fe/js/lib/zepto-1.1.4.js"></script>
+    <script src="/fe/js/common/base.js"></script>
+    <script>
+	    function deleteDaily(id){
+			myUtil.api("/lovelulu/daily/delete",{"id":id},"GET",function(code,desc,data,res){
+				console.log(res);
+				if(code==0){
+					alert("删除成功");
+					window.location.reload();
+				}
+			});
+		}
+    	$(".deletebtn").click(function(){
+    		var id = $(this).attr("data-delid");
+    		deleteDaily(id);
+    	});
+    </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

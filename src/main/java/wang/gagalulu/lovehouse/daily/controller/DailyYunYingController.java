@@ -47,6 +47,7 @@ public class DailyYunYingController {
 		model.addAttribute("indexBegin", pno*psize);
 		model.addAttribute("dailyCount", count);
 		model.addAttribute("allPage", page);
+		model.addAttribute("pno",pno);
 		return "/dailys/yunying/myDailylist";
 	}
 	

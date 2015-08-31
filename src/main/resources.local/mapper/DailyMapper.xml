@@ -17,12 +17,14 @@
 		<trim suffixOverrides=",">
 			<if test="id != null"> id ,</if>
 			<if test="content != null"> content ,</if>
+			<if test="title != null"> title ,</if>
 			<if test="createTime != null"> create_time ,</if>
 		</trim>
 		)values(
 		<trim suffixOverrides=",">
 			<if test="id != null"> #{id} ,</if>
 			<if test="content != null"> #{content} ,</if>
+			<if test="title != null"> #{title} ,</if>
 			<if test="createTime != null"> #{createTime} ,</if>
 		</trim>
 		)
