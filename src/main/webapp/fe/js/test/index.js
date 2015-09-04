@@ -5,8 +5,8 @@ function initPage(){
     initShare();
 }
 function initShare(){
-    wxBridge.setImgUrl("http://cgzp.cdn.novorunning.com/second/images/big_icon.jpg");
-    wxBridge.setLink("http://gagalulu.wang/lovelulu/game/oneSecond");
-    wxBridge.setTitle("超级无敌王子冬，竟然按出了1s，快来试一试！");
-    wxBridge.setDesc("你肯定不行！！！！");
+    wxBridge.setImgUrl("http://cgz");
+    wxBridge.setLink("http://www.jiemo.net/smallgame/facegame/?from=groupmessage&isappinstalled=0");
+    wxBridge.setTitle("我在10秒内打了京京250次脸，获得了'你太牛逼'称号，本游戏由《芥末》贡献");
+    wxBridge.setDesc("www.jiemo.net");
 }
