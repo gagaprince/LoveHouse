@@ -186,7 +186,7 @@ article { width: 1000px; margin: auto; overflow: hidden }
 .icon-album span { background-position: 0 -40px }
 .music audio { width: 100%; margin-top: 10px }
 /* ндубап╠М */
-.r_box li { background: #f9e4d8; border: #d9d8d7 1px solid; padding: 15px; overflow: hidden; color: #797b7c; margin-bottom: 15px }
+.r_box li { background: #f9e4d8; border: #d9d8d7 1px solid; padding: 15px; overflow: hidden; color: #797b7c; margin-bottom: 15px; }
 .r_box li h3 { font-size: 16px; background: url(http://gagaprince.oss-cn-beijing.aliyuncs.com/lovespace/boy/blogli.png) left center no-repeat; line-height: 25px; padding-left: 50px; text-shadow: #FFF 1px 1px 1px }
 .r_box li h3 a { color: #222 }
 .r_box li h3 a:hover { color: #000; text-decoration: underline }

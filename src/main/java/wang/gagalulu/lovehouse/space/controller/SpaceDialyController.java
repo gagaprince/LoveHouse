@@ -23,7 +23,7 @@ public class SpaceDialyController {
 	public String ueditorIndex(HttpServletRequest request,Long dailyId,Model model){
 		if(dailyId!=null){
 			SpaceDailyModel dailyModel = spaceDailyService.iWantADaily(dailyId);
-			model.addAttribute("dailyData", JSON.toJSONString(dailyModel));
+			model.addAttribute("dailyData",  dailyModel);
 		}
 		return "/ueditor/index";
 	}
@@ -45,4 +45,6 @@ public class SpaceDialyController {
 		}
 		return JSON.toJSONString(model);
 	}
+	
+	
 }

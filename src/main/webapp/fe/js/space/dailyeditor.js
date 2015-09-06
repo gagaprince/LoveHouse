@@ -130,12 +130,14 @@ function save(){
         return;
     }
     var content = UE.getEditor('editor').getContent();
+    var preContent=UE.getEditor('editor').getContentTxt();
     var fetchData = {};
     var contextId=myUtil.getQueryString("dailyId");
     fetchData["peopleId"]=111;
     fetchData["title"]=title;
     fetchData["cate"]=cate;
     fetchData["content"]=content;
+    fetchData["preContent"]=preContent.substr(0,120);
     if(typeof contextId !="undefined"){
         fetchData["id"]=contextId;
     }
@@ -146,7 +148,7 @@ function save(){
             alert("保存成功");
             if(!contextId){
                 var dailyId = data.id;
-                window.location = "/lovelulu/space/index?dailyId="+dailyId;
+                window.location = "/lovelulu/space/ueindex?dailyId="+dailyId;
             }
         }
     });

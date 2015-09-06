@@ -16,9 +16,6 @@
 		<param-name>log4jConfigLocation</param-name>
 		<param-value>classpath:log4j.properties</param-value>
 	</context-param>
-	<listener>
-		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-	</listener> 
   
   <servlet>  
         <servlet-name>springMVC</servlet-name>  
@@ -31,7 +28,7 @@
 		  <param-name>encoding</param-name>  
 		  <param-value>UTF-8</param-value>  
 		 </init-param> 
-        <load-on-startup>1</load-on-startup>  
+		 <load-on-startup>1</load-on-startup>
     </servlet>  
     
     <context-param>
@@ -39,9 +36,6 @@
 	    <param-value>classpath:spring/app-root.xml</param-value>  
 	</context-param> 
     
-    <listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener> 
     <servlet-mapping>  
         <servlet-name>springMVC</servlet-name>  
         <url-pattern>/</url-pattern>  

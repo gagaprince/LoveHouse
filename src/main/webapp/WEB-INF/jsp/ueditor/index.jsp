@@ -132,12 +132,14 @@
 <script src="/fe/js/space/dailyeditor.js"></script>
 <c:if test="${!empty dailyData}">
     <script>
-        var DailyObj = JSON.parse('${dailyData}');
+        var dailyContentStr = '${dailyData.content}';
+        var dailyTitleStr = '${dailyData.title}';
+        var dailyCateStr = '${dailyData.cate}';
         setTimeout(function(){
-            setContent(DailyObj.content);
+            setContent(dailyContentStr);
         },1000);
-        $("#title").val(DailyObj.title);
-        setSelector("cateSelect",DailyObj.cate);
+        $("#title").val(dailyTitleStr);
+        setSelector("cateSelect",dailyCateStr);
     </script>
 </c:if>
 </body>

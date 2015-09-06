@@ -9,6 +9,14 @@ public class SpaceDailyModel {
 	private String content;
 	private String cate;
 	private Date createTime;
+	private String preContent;
+	
+	public String getPreContent() {
+		return preContent;
+	}
+	public void setPreContent(String preContent) {
+		this.preContent = preContent;
+	}
 	public Long getId() {
 		return id;
 	}
