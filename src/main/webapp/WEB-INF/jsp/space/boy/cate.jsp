@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <c:forEach var="dailyItem" items="${cateDailys}" varStatus="status">
         <li style="max-height:115px;">
             <a href="#"><img src="http://gagaprince.oss-cn-beijing.aliyuncs.com/lovespace/boy/0${status.index+1}.jpg"></a>
-            <h3><a href="/lovehouse/space/boy/detail?id=${dailyItem.id}">${dailyItem.title}</a></h3>
+            <h3><a href="/lovelulu/space/detail?id=${dailyItem.id}">${dailyItem.title}</a></h3>
             <p>${dailyItem.preContent}</p>
         </li>
     </c:forEach>

@@ -7,9 +7,9 @@
 <!--nav begin-->
 <div id="nav">
   <ul>
-    <li><a href="/lovehouse/space/boy/index">首页</a></li>
-    <li><a href="/lovehouse/space/boy/cate?cate=慢生活">慢生活</a></li>
-    <li><a href="/lovehouse/space/boy/cate?cate=技术人生">技术人生</a></li>
+    <li><a href="/lovelulu/space/boy">首页</a></li>
+    <li><a href="/lovelulu/space/cate?cate=慢生活">慢生活</a></li>
+    <li><a href="/lovelulu/space/cate?cate=技术人生">技术人生</a></li>
     <!-- <li><a href="#">留言板</a></li> -->
   </ul>
 </div>
