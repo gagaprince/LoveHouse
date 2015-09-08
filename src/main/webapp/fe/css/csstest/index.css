@@ -1,0 +1,17 @@
+body{
+    background:#008855;
+}
+.content{
+    width:100%;
+}
+.content .linkitem{
+    width:100%;
+    height:50px;
+    font-size:18px;
+}
+.content .linkitem a{
+    color: #00ff00;
+}
+.content .linkitem a:hover{
+    color: #7eb73d;
+}
