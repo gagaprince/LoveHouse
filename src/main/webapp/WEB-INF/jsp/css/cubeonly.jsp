@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = "/lovelulu/css";//request.getContextPath();
+String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -27,12 +27,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <meta name="description" content="">
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="/fe/css/base/base.css">
-        <link rel="stylesheet" type="text/css" href="/fe/css/csstest/index.css">
+        <link rel="stylesheet" type="text/css" href="/fe/css/csstest/cubeonly.css">
     </head>
     <body>
-        <div class="content">
-            <div class="linkitem v-c"><a href="cubeonly">立体式</a></div>
-            <div class="linkitem v-c"><a href="cube">立体式动画</a></div>
+    <div id="wall" class="wall">
+        <div class="cube">
+            <div class="side front" style="background-image: url(http://demo.lanrenzhijia.com/2015/pic0821/images/minion_2.jpg);"></div>
+            <div class="side right" style="background-image: url(http://demo.lanrenzhijia.com/2015/pic0821/images/minion_3.jpg);"></div>
+            <div class="side back"></div>
+            <div class="side left" style="background-image: url(http://demo.lanrenzhijia.com/2015/pic0821/images/minion_3.jpg);"></div>
+            <div class="side top" style="background-image: url(http://demo.lanrenzhijia.com/2015/pic0821/images/minion_3.jpg);"></div>
+            <div class="side bottom" style="background-image: url(http://demo.lanrenzhijia.com/2015/pic0821/images/minion_3.jpg);"></div>
         </div>
+    </div>
     </body>
+    <script src="/fe/js/csstest/cubeonly.js"></script>
 </html>
