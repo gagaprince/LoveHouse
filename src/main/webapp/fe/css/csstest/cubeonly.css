@@ -39,7 +39,7 @@ body {
     margin: auto;
 
     -webkit-transform: rotate(0deg) rotateY(0deg) translateZ(30px);
-    transform: rotate(0deg) rotateY(0deg) translateZ(50px);
+    transform: rotateX(60deg) rotateY(60deg) translateZ(0px);
 }
 .cube.sliding {
     -webkit-animation-play-state: running;
