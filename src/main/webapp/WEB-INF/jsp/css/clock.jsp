@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <head>
         <base href="<%=basePath%>">
 
-        <title>css特效</title>
+        <title>钟表</title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport">
@@ -27,20 +27,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <meta name="description" content="">
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="/fe/css/base/base.css">
-        <link rel="stylesheet" type="text/css" href="/fe/css/csstest/cubeonly.css">
+        <link rel="stylesheet" type="text/css" href="/fe/css/csstest/clock.css">
     </head>
     <body>
-    <div id="wall" class="wall">
-        <div class="cube">
-            <div class="side front" style="background-image: url(http://demo.lanrenzhijia.com/2015/pic0821/images/minion_2.jpg);"></div>
-            <div class="side right" style="background-image: url(http://demo.lanrenzhijia.com/2015/pic0821/images/minion_3.jpg);"></div>
-            <div class="side back"></div>
-            <div class="side left" style="background-image: url(http://demo.lanrenzhijia.com/2015/pic0821/images/minion_3.jpg);"></div>
-            <div class="side top" style="background-image: url(http://demo.lanrenzhijia.com/2015/pic0821/images/minion_3.jpg);"></div>
-            <div class="side bottom" style="background-image: url(http://demo.lanrenzhijia.com/2015/pic0821/images/minion_3.jpg);"></div>
-        </div>
-    </div>
+        <ul id="clock">
+            <li id="date"></li>
+            <li id="seconds"></li>
+            <li id="hours"></li>
+            <li id="minutes"></li>
+        </ul>
     </body>
     <script type="text/javascript" src="/fe/js/lib/zepto-1.1.4.js"></script>
-    <script src="/fe/js/csstest/cubeonly.js"></script>
+    <script src="/fe/js/csstest/clock.js"></script>
 </html>

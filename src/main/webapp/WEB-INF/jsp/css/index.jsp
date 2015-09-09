@@ -33,6 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="content">
             <div class="linkitem v-c"><a href="/lovelulu/css/cubeonly">立体式</a></div>
             <div class="linkitem v-c"><a href="/lovelulu/css/cube">立体式动画</a></div>
+            <div class="linkitem v-c"><a href="/lovelulu/css/clock">时钟</a></div>
         </div>
     </body>
 </html>
