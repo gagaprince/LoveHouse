@@ -13,6 +13,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="Keywords" content="" >
 <meta name="Description" content="" >
 <link href="/fe/css/space/index.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/fe/css/base/base.css">
+<link rel="stylesheet" type="text/css" href="/fe/css/csstest/clock.css">
 <!--[if lt IE 9]>
 <script src="/fe/js/space/modernizr.js"></script>
 <![endif]-->
@@ -33,6 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </c:forEach>
   </div>
 </article>
+    <script type="text/javascript" src="/fe/js/lib/zepto-1.1.4.js"></script>
+    <script src="/fe/js/csstest/clock.js"></script>
 </body>
 </html>
 

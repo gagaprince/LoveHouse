@@ -13,6 +13,6 @@
 	</resultMap>
 	
 	<select id="getAllSong" parameterType="map"  resultMap="SongModelResultMap">
-		select * from song
+		select * from song where online=1
 	</select>
 </mapper>

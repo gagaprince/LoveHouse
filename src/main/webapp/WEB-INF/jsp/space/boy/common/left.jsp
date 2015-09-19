@@ -42,6 +42,16 @@
     </dl>
     </ul>
     </div>
+
+    <div class="about_he" id="aboutHer">
+        <h2>时间是世界上最独特的解药</h2>
+        <ul id="clock" style="margin:0 0 0 -12px;">
+            <li id="date"></li>
+            <li id="seconds"></li>
+            <li id="hours"></li>
+            <li id="minutes"></li>
+        </ul>
+    </div>
     </div>
 
 
