@@ -12,8 +12,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>gaga的技术小屋</title>
 <meta name="Keywords" content="" >
 <meta name="Description" content="" >
-<link href="/fe/css/space/index.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/fe/css/base/base.css">
+<link href="/fe/css/space/index.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/fe/css/csstest/clock.css">
 <!--[if lt IE 9]>
 <script src="/fe/js/space/modernizr.js"></script>
