@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +22,15 @@ public class BoyIndexController {
 	@Autowired
 	private SpaceDailyService spaceDailyService;
 	
+	private static final Logger logger =  Logger.getLogger(BoyIndexController.class);
+	
 	@RequestMapping(value = "/boy", method = RequestMethod.GET)
 	public String boyIndex(HttpServletRequest request,Model model){
 		List<SpaceDailyModel> latestDailys =  spaceDailyService.iWantLatestDailys(5);
 		model.addAttribute("LatestDailys", latestDailys);
 		SongModel song = spaceDailyService.iWantASong();
 		model.addAttribute("song", song);
+		logger.info("request url"+request.getRequestURL());
 		return "/space/boy/index";
 	}
 	@RequestMapping(value = "/about", method = RequestMethod.GET)
